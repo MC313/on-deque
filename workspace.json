@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "on-deque-web": "apps/on-deque-web",
+    "on-deque-web-e2e": "apps/on-deque-web-e2e"
+  }
+}

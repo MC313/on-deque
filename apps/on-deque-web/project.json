@@ -1,0 +1,73 @@
+{
+  "root": "apps/on-deque-web",
+  "sourceRoot": "apps/on-deque-web/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/on-deque-web",
+        "index": "apps/on-deque-web/src/index.html",
+        "baseHref": "/",
+        "main": "apps/on-deque-web/src/main.tsx",
+        "polyfills": "apps/on-deque-web/src/polyfills.ts",
+        "tsConfig": "apps/on-deque-web/tsconfig.app.json",
+        "assets": [
+          "apps/on-deque-web/src/favicon.ico",
+          "apps/on-deque-web/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/on-deque-web/src/environments/environment.ts",
+              "with": "apps/on-deque-web/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "on-deque-web:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "on-deque-web:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/on-deque-web/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/on-deque-web"],
+      "options": {
+        "jestConfig": "apps/on-deque-web/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
