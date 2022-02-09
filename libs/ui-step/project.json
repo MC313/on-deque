@@ -1,0 +1,23 @@
+{
+  "root": "libs/ui-step",
+  "sourceRoot": "libs/ui-step/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui-step/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ui-step"],
+      "options": {
+        "jestConfig": "libs/ui-step/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

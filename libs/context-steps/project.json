@@ -1,0 +1,23 @@
+{
+  "root": "libs/context-steps",
+  "sourceRoot": "libs/context-steps/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/context-steps/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/context-steps"],
+      "options": {
+        "jestConfig": "libs/context-steps/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

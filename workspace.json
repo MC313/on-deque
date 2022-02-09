@@ -1,7 +1,23 @@
 {
   "version": 2,
   "projects": {
+    "context-form": "libs/context-form",
+    "context-steps": "libs/context-steps",
+    "feature-save-link": "libs/feature-save-link",
+    "feature-step-one": "libs/feature-step-one",
+    "feature-step-three": "libs/feature-step-three",
+    "feature-step-two": "libs/feature-step-two",
+    "feature-steps-wizard": "libs/feature-steps-wizard",
+    "on-deque-ext": "apps/on-deque-ext",
+    "on-deque-ext-e2e": "apps/on-deque-ext-e2e",
     "on-deque-web": "apps/on-deque-web",
-    "on-deque-web-e2e": "apps/on-deque-web-e2e"
+    "on-deque-web-e2e": "apps/on-deque-web-e2e",
+    "ui-button": "libs/ui-button",
+    "ui-form-field": "libs/ui-form-field",
+    "ui-input": "libs/ui-input",
+    "ui-input-dropdown": "libs/ui-input-dropdown",
+    "ui-input-error": "libs/ui-input-error",
+    "ui-input-label": "libs/ui-input-label",
+    "ui-step": "libs/ui-step"
   }
 }

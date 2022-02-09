@@ -1,0 +1,23 @@
+{
+  "root": "libs/feature-step-one",
+  "sourceRoot": "libs/feature-step-one/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/feature-step-one/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/feature-step-one"],
+      "options": {
+        "jestConfig": "libs/feature-step-one/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

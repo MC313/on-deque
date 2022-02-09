@@ -1,0 +1,23 @@
+{
+  "root": "libs/ui-input-error",
+  "sourceRoot": "libs/ui-input-error/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui-input-error/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ui-input-error"],
+      "options": {
+        "jestConfig": "libs/ui-input-error/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

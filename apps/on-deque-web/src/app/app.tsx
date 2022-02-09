@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Button } from '@on-deque/ui-button';
 import NxWelcome from './nx-welcome';
 
 const StyledApp = styled.div`
@@ -8,7 +9,8 @@ const StyledApp = styled.div`
 export function App() {
   return (
     <StyledApp>
-      <NxWelcome title="on-deque-web" />
+      {/* <NxWelcome title="on-deque-web" /> */}
+      <Button />
     </StyledApp>
   );
 }

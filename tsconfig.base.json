@@ -14,7 +14,25 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@on-deque/context-form": ["libs/context-form/src/index.ts"],
+      "@on-deque/context-steps": ["libs/context-steps/src/index.ts"],
+      "@on-deque/feature-save-link": ["libs/feature-save-link/src/index.ts"],
+      "@on-deque/feature-step-one": ["libs/feature-step-one/src/index.ts"],
+      "@on-deque/feature-step-three": ["libs/feature-step-three/src/index.ts"],
+      "@on-deque/feature-step-two": ["libs/feature-step-two/src/index.ts"],
+      "@on-deque/feature-steps-wizard": [
+        "libs/feature-steps-wizard/src/index.ts"
+      ],
+      "@on-deque/ui-button": ["libs/ui-button/src/index.ts"],
+      "@on-deque/ui-form-field": ["libs/ui-form-field/src/index.ts"],
+      "@on-deque/ui-input": ["libs/ui-input/src/index.ts"],
+      "@on-deque/ui-input-dropdown": ["libs/ui-input-dropdown/src/index.ts"],
+      "@on-deque/ui-input-error": ["libs/ui-input-error/src/index.ts"],
+      "@on-deque/ui-input-label": ["libs/ui-input-label/src/index.ts"],
+      "@on-deque/ui-step": ["libs/ui-step/src/index.ts"],
+      "@styles": ["styles/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

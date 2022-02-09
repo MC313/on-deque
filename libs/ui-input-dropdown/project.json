@@ -1,0 +1,23 @@
+{
+  "root": "libs/ui-input-dropdown",
+  "sourceRoot": "libs/ui-input-dropdown/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui-input-dropdown/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ui-input-dropdown"],
+      "options": {
+        "jestConfig": "libs/ui-input-dropdown/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

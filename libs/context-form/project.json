@@ -1,0 +1,23 @@
+{
+  "root": "libs/context-form",
+  "sourceRoot": "libs/context-form/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/context-form/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/context-form"],
+      "options": {
+        "jestConfig": "libs/context-form/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

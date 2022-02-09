@@ -1,0 +1,35 @@
+{
+    "manifest_version": 3,
+    "name": "On Deque",
+    "description": "Reduce the number of tabs you keep open by saving the urls you find around the web and setting reminders to read them later.",
+    "version": "1.0",
+    "icons": {
+        "16": "assets/hello_extensions.png"
+    },
+    "action": {
+        "default_title": "On Deque",
+        "default_popup": "index.html",
+        "default_icon": "assets/hello_extensions.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "commands": {
+        "_execute_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+F",
+                "mac": "MacCtrl+Shift+F"
+            },
+            "description": "Opens index.html"
+        }
+    },
+    "host_permissions": [
+        "https://vc9srwoh4b.execute-api.us-east-1.amazonaws.com/dev/link",
+        "https://vc9srwoh4b.execute-api.us-east-1.amazonaws.com/prod/link"
+    ],
+    "permissions": [
+        "notifications",
+        "storage",
+        "tabs"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+  "root": "libs/feature-steps-wizard",
+  "sourceRoot": "libs/feature-steps-wizard/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/feature-steps-wizard/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/feature-steps-wizard"],
+      "options": {
+        "jestConfig": "libs/feature-steps-wizard/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

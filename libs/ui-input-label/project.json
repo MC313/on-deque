@@ -1,0 +1,29 @@
+{
+  "root": "libs/ui-input-label",
+  "sourceRoot": "libs/ui-input-label/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "libs/ui-input-label/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/ui-input-label"
+      ],
+      "options": {
+        "jestConfig": "libs/ui-input-label/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

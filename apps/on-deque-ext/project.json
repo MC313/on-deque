@@ -1,0 +1,84 @@
+{
+  "root": "apps/on-deque-ext",
+  "sourceRoot": "apps/on-deque-ext/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/on-deque-ext",
+        "index": "apps/on-deque-ext/src/index.html",
+        "baseHref": "/",
+        "main": "apps/on-deque-ext/src/main.tsx",
+        "polyfills": "apps/on-deque-ext/src/polyfills.ts",
+        "tsConfig": "apps/on-deque-ext/tsconfig.app.json",
+        "assets": [
+          "apps/on-deque-ext/src/favicon.ico",
+          "apps/on-deque-ext/src/assets",
+          "apps/on-deque-ext/src/manifest.json",
+          "apps/on-deque-ext/src/index.css",
+          "apps/on-deque-ext/src/background.js"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "apps/on-deque-ext/webpack.config.js"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/on-deque-ext/src/environments/environment.ts",
+              "with": "apps/on-deque-ext/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "on-deque-ext:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "on-deque-ext:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/on-deque-ext/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/apps/on-deque-ext"
+      ],
+      "options": {
+        "jestConfig": "apps/on-deque-ext/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

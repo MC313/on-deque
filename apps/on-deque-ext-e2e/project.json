@@ -1,0 +1,28 @@
+{
+  "root": "apps/on-deque-ext-e2e",
+  "sourceRoot": "apps/on-deque-ext-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/on-deque-ext-e2e/cypress.json",
+        "devServerTarget": "on-deque-ext:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "on-deque-ext:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/on-deque-ext-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["on-deque-ext"]
+}

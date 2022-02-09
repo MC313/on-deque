@@ -1,0 +1,23 @@
+{
+  "root": "libs/feature-step-three",
+  "sourceRoot": "libs/feature-step-three/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/feature-step-three/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/feature-step-three"],
+      "options": {
+        "jestConfig": "libs/feature-step-three/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
