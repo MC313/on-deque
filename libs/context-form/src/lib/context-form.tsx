@@ -50,6 +50,7 @@ const formReducer: FormReducer = (state, action) => {
       return {
         ...state,
         fields: { ...state.fields, [field]: value },
+        errors: { ...state.errors, [field]: "" },
       };
     }
     case FormTypeKeys.SET_INPUT_ERROR: {

@@ -3,12 +3,13 @@ import { useSteps } from "@on-deque/context-steps";
 import { Button } from "@on-deque/ui-button";
 import { FormField } from "@on-deque/ui-form-field";
 import { Step } from "@on-deque/ui-step";
+import { logger } from "@on-deque/util-logger";
 
 export const StepOne = () => {
   const [{ errors, fields }, dispatch] = useForm();
-  const [_, dispatchStep] = useSteps();
-  console.log("ERRORS: ", errors);
-  console.log("FIELDS: ", fields);
+  const [_, { nextStep }] = useSteps();
+  const disableBtn: boolean = !fields.url && !!errors.url;
+
   return (
     <Step>
       <FormField
@@ -18,7 +19,6 @@ export const StepOne = () => {
         name="url"
         onChange={dispatch.setInput("url")}
         onError={() => dispatch.setInputError("url")}
-        placeholder="https://testing-library.com/docs/"
         required={true}
         type="url"
         value={fields["url"] as string}
@@ -28,7 +28,6 @@ export const StepOne = () => {
         labelType="floating"
         name="description"
         onChange={dispatch.setInput("description")}
-        placeholder="Description of the saved link"
         required={false}
         value={fields["description"] as string}
       />
@@ -41,7 +40,7 @@ export const StepOne = () => {
         required={false}
         value={fields["tags"] as string}
       />
-      <Button disabled={!!errors} onClick={dispatchStep.nextStep}>
+      <Button disabled={disableBtn} onClick={nextStep}>
         {"Continue ->"}
       </Button>
     </Step>

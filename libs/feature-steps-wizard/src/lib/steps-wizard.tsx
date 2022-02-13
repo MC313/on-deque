@@ -2,27 +2,25 @@ import React from "react";
 
 import styled from "@emotion/styled";
 
-import { flex } from "@styles";
 import { useSteps } from "@on-deque/context-steps";
+import { flex } from "@styles";
 
 export const StepsWizard = ({ children }: StepsWizardProps) => {
   const [{ step }] = useSteps();
-  const wizardContainer = React.useRef<HTMLDivElement>(null);
+  const wizardContainer = React.useRef<HTMLUListElement>(null);
 
   React.useLayoutEffect(() => {
-    console.log("running transform ref: ", step);
     const STEP_WIDTH = 100;
     const position = STEP_WIDTH * step;
+
     if (wizardContainer && wizardContainer.current) {
-      wizardContainer.current.style.transform = `translateX(${position})`;
+      wizardContainer.current.style.transform = `translateX(-${position}%)`;
     }
   }, [step]);
 
   return (
     <StyledStepsWizardContainer>
-      <StyledStepsWizard ref={(wizardContainer) => null}>
-        {children}
-      </StyledStepsWizard>
+      <StyledStepsWizard ref={wizardContainer}>{children}</StyledStepsWizard>
     </StyledStepsWizardContainer>
   );
 };
@@ -34,9 +32,9 @@ const StyledStepsWizardContainer = styled.div`
 
 const StyledStepsWizard = styled.ul`
   ${flex.row}
-  margin: "0px",
-  padding: "0px",
-  transition: "transform 0.4s linear"
+  margin: 0px;
+  padding: 0px;
+  transition: transform 0.4s linear;
 `;
 
 /* eslint-disable-next-line */

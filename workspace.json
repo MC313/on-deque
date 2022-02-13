@@ -15,9 +15,11 @@
     "ui-button": "libs/ui-button",
     "ui-form-field": "libs/ui-form-field",
     "ui-input": "libs/ui-input",
+    "ui-input-calendar": "libs/ui-input-calendar",
     "ui-input-dropdown": "libs/ui-input-dropdown",
     "ui-input-error": "libs/ui-input-error",
     "ui-input-label": "libs/ui-input-label",
-    "ui-step": "libs/ui-step"
+    "ui-step": "libs/ui-step",
+    "util-logger": "libs/util-logger"
   }
 }

@@ -11,11 +11,11 @@ export type StepProps = React.PropsWithChildren<{
   scroll?: boolean;
 }>;
 
-const StyledStep = styled.li`
-  overflow: ${({ scroll }: StepProps) => (scroll ? "scroll" : "hidden")};
+const StyledStep = styled.li<StepProps>`
   display: flex;
   flex-direction: column;
-  align-items: ${({ center }: StepProps) => (center ? "center" : "inherit")};
-  min-width: 100%;
+  justify-content: ${({ center }) => (center ? "center" : "inherit")};
   margin: 15px 0px;
+  min-width: 100%;
+  overflow: ${({ scroll }) => (scroll ? "scroll" : "hidden")};
 `;

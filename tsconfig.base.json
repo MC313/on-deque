@@ -27,10 +27,12 @@
       "@on-deque/ui-button": ["libs/ui-button/src/index.ts"],
       "@on-deque/ui-form-field": ["libs/ui-form-field/src/index.ts"],
       "@on-deque/ui-input": ["libs/ui-input/src/index.ts"],
+      "@on-deque/ui-input-calendar": ["libs/ui-input-calendar/src/index.ts"],
       "@on-deque/ui-input-dropdown": ["libs/ui-input-dropdown/src/index.ts"],
       "@on-deque/ui-input-error": ["libs/ui-input-error/src/index.ts"],
       "@on-deque/ui-input-label": ["libs/ui-input-label/src/index.ts"],
       "@on-deque/ui-step": ["libs/ui-step/src/index.ts"],
+      "@on-deque/util-logger": ["libs/util-logger/src/index.ts"],
       "@styles": ["styles/index.ts"]
     }
   },

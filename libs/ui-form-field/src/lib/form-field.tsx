@@ -39,6 +39,7 @@ export const FormField = ({
     InputStatus.BLUR
   );
   const [error, validateInput] = useValidateInput(name, onError);
+
   const onBlur = (e: React.SyntheticEvent<HTMLInputElement>) => {
     setInputStatus(InputStatus.BLUR);
     validateInput(e);
@@ -94,21 +95,6 @@ const getLabelStatus = (inputStatus: InputStatus, inputValue: any) => {
   return status;
 };
 
-/* eslint-disable-next-line */
-export interface FormFieldProps extends InputProps, Omit<LabelProps, "label"> {
-  label?: undefined | string;
-  labelType?: LabelType;
-  name: string;
-  styles?: React.CSSProperties;
-}
-
-interface StyledFormFieldProps {
-  isFloatingLabel: boolean;
-  styles: React.CSSProperties;
-}
-
-type LabelType = "standard" | "floating";
-
 const labelInputWrapperStyles = css`
   ${flex.column};
   background: ${colors.inputBackground};
@@ -131,3 +117,18 @@ const StyledFormField = styled.div<StyledFormFieldProps>`
       isFloatingLabel && { ...labelInputWrapperStyles }};
   }
 `;
+
+/* eslint-disable-next-line */
+export interface FormFieldProps extends InputProps, Omit<LabelProps, "label"> {
+  label?: undefined | string;
+  labelType?: LabelType;
+  name: string;
+  styles?: React.CSSProperties;
+}
+
+interface StyledFormFieldProps {
+  isFloatingLabel: boolean;
+  styles: React.CSSProperties;
+}
+
+type LabelType = "standard" | "floating";

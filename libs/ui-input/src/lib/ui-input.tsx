@@ -9,8 +9,7 @@ export const Input = ({ labelType = "standard", ...props }: InputProps) => {
 
 const StyledInput = styled.input<StyledInputProps>`
   background: ${colors.inputBackground};
-  border: 2px solid;
-  border-color: ${({ isFloating }) => (isFloating ? "transparent" : "inherit")};
+  border: 2px solid transparent;
   border-radius: ${radius.medium};
   font-size: ${fonts.medium};
   height: 40px;

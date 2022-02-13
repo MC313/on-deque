@@ -17,21 +17,31 @@ const stepsState = { step: 1, totalSteps: 0 };
  *        Reducer
  * =======================
  */
+
+const _validateStep = (step: number, total: number) => (newStep: number) => {
+  if (newStep < 1 || newStep > total) {
+    return step;
+  } else {
+    return newStep;
+  }
+};
+
 const stepsReducer: StepsReducer = (state, action) => {
   const { payload, type } = action;
-
-  if (!payload || payload < 1 || payload > state.totalSteps) return state;
+  const { step, totalSteps } = state;
+  const nextStep = step + 1;
+  const validateStep = _validateStep(step, totalSteps);
 
   switch (type) {
     case StepsTypeKeys.SET_STEP:
       return {
         ...state,
-        step: payload,
+        step: validateStep(payload as number),
       };
     case StepsTypeKeys.NEXT_STEP:
       return {
         ...state,
-        step: state.step++,
+        step: validateStep(nextStep),
       };
     default:
       return state;

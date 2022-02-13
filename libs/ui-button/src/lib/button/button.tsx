@@ -3,12 +3,17 @@ import styled from "@emotion/styled";
 import { colors, fonts, radius } from "@styles";
 
 export const Button = ({
+  calendar,
   children,
   primary,
   size,
   type = "button",
   ...props
-}: ButtonProps) => <StyledButton {...props}>{children}</StyledButton>;
+}: ButtonProps) => (
+  <StyledButton type={type} {...props}>
+    {children}
+  </StyledButton>
+);
 
 const StyledButton = styled.button<ButtonProps>`
   background: ${colors.primary};
@@ -44,6 +49,7 @@ const setSize = (size: ButtonSize | undefined) => {
 type ButtonSize = "small" | "medium" | "large";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  calendar?: boolean;
   primary?: boolean;
   size?: ButtonSize;
   styles?: object;
