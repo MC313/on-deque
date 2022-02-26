@@ -1,0 +1,23 @@
+{
+  "root": "libs/ui-review-text",
+  "sourceRoot": "libs/ui-review-text/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui-review-text/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ui-review-text"],
+      "options": {
+        "jestConfig": "libs/ui-review-text/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

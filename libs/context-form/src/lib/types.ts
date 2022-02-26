@@ -33,6 +33,7 @@ export enum FormTypeKeys {
   SET_FORM_SUCCESS = "SET_FORM_SUCCESS",
   SET_INPUT_ERROR = "SET_INPUT_ERROR",
   SET_INPUT_VALUE = "SET_INPUT_VALUE",
+  SUBMIT_FORM = "SUBMIT_FORM",
   SUBMITTING_FORM = "SUBMITTING_FORM",
 }
 
@@ -59,6 +60,11 @@ export interface SetInputValueAction {
   };
 }
 
+export interface SubmitFormAction {
+  type: FormTypeKeys.SUBMIT_FORM;
+  payload: FormFields;
+}
+
 export interface InputValuePayload {
   payload: SetInputValueAction["payload"]["field"];
 }
@@ -77,6 +83,7 @@ export type FormActions =
   | FormSubmittingAction
   | FormSuccessAction
   | ResetFormAction
+  | SubmitFormAction
   | SetFormErrorAction
   | SetInputErrorAction
   | SetInputValueAction;
@@ -93,6 +100,7 @@ export type ActionName =
   | "formSubmitting"
   | "formSuccess"
   | "resetForm"
+  | "submitForm"
   | "setFormError"
   | "setInput"
   | "setInputError";

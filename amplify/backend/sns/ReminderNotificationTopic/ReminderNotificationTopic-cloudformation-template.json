@@ -1,0 +1,110 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "SNS resource to receive notification messages from cloudwatch scheduled reminder.",
+    "Parameters": {
+        "env": {
+            "Type": "String"
+        },
+        "functionSendWebNotficationLambdaArn": {
+            "Type": "String"
+        }
+    },
+    "Conditions": {
+        "ShouldNotCreateEnvResources": {
+            "Fn::Equals": [
+                {
+                    "Ref": "env"
+                },
+                "NONE"
+            ]
+        }
+    },
+    "Resources": {
+        "ReminderNotificationTopic": {
+            "Type": "AWS::SNS::Topic",
+            "Properties": {
+                "TopicName": {
+                    "Fn::If": [
+                        "ShouldNotCreateEnvResources",
+                        "ScheduledReminderNotificationTopic",
+                        {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    "ScheduledReminderNotificationTopic",
+                                    "-",
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                "Subscription": [
+                    {
+                        "Endpoint": {
+                            "Ref": "functionSendWebNotficationLambdaArn"
+                        },
+                        "Protocol": "lambda"
+                    }
+                ]
+            }
+        },
+        "ProcessReminderNotificationLambdaPermission": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Ref": "functionSendWebNotficationLambdaArn"
+                },
+                "Principal": "sns.amazonaws.com",
+                "SourceArn": {
+                    "Ref": "ReminderNotificationTopic"
+                }
+            }
+        },
+        "ReminderNotificationTopicAccessPolicy": {
+            "Type": "AWS::SNS::TopicPolicy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Sid": "Allow-Cloudwatch-Publish-To-SNS-Topic",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "events.amazonaws.com"
+                            },
+                            "Action": [
+                                "sns:Publish"
+                            ],
+                            "Resource": {
+                                "Ref": "ReminderNotificationTopic"
+                            }
+                        }
+                    ]
+                },
+                "Topics": [
+                    {
+                        "Ref": "ReminderNotificationTopic"
+                    }
+                ]
+            }
+        }
+    },
+    "Outputs": {
+        "Arn": {
+            "Value": {
+                "Ref": "ReminderNotificationTopic"
+            }
+        },
+        "Name": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "ReminderNotificationTopic",
+                    "TopicName"
+                ]
+            }
+        }
+    }
+}

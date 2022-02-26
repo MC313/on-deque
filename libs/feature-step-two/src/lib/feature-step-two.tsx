@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 import { useForm } from "@on-deque/context-form";
+import { useSteps } from "@on-deque/context-steps";
 import { Button } from "@on-deque/ui-button";
 import { Input } from "@on-deque/ui-input";
 import { InputCalendar } from "@on-deque/ui-input-calendar";
@@ -11,6 +12,7 @@ import { colors, flex, fonts, height, margin } from "@styles";
 
 export const StepTwo = () => {
   const [{ fields }, { setInput }] = useForm();
+  const [, { nextStep }] = useSteps();
   const { reminderValue } = fields;
   const TIME_UNIT_OPTIONS = ["minute", "hour", "day"];
 
@@ -37,7 +39,9 @@ export const StepTwo = () => {
       </StyledFormFieldGroup>
       <StyledText>Or</StyledText>
       <InputCalendar />
-      <Button primary>Continue</Button>
+      <Button align="bottom" onClick={nextStep}>
+        Continue
+      </Button>
     </Step>
   );
 };

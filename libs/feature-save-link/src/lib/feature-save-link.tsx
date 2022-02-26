@@ -2,28 +2,29 @@ import styled from "@emotion/styled";
 
 import { FormProvider } from "@on-deque/context-form";
 import { StepsProvider } from "@on-deque/context-steps";
+import { SaveLinkHeader } from "@on-deque/feature-save-link-header";
 import { StepOne } from "@on-deque/feature-step-one";
+import { StepThree } from "@on-deque/feature-step-three";
 import { StepTwo } from "@on-deque/feature-step-two";
 import { StepsWizard } from "@on-deque/feature-steps-wizard";
 import { flex } from "@styles";
 
-export const SaveLink = (props: FeatureSaveLinkProps) => {
+export const SaveLink = () => {
   return (
-    <FormProvider>
-      <Styledform>
-        <StepsProvider totalSteps={3}>
+    <StepsProvider totalSteps={3}>
+      <SaveLinkHeader />
+      <FormProvider>
+        <Styledform>
           <StepsWizard>
             <StepOne />
             <StepTwo />
+            <StepThree />
           </StepsWizard>
-        </StepsProvider>
-      </Styledform>
-    </FormProvider>
+        </Styledform>
+      </FormProvider>
+    </StepsProvider>
   );
 };
-
-/* eslint-disable-next-line */
-export interface FeatureSaveLinkProps {}
 
 const Styledform = styled.form`
   ${flex.center}

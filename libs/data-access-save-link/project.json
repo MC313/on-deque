@@ -1,0 +1,23 @@
+{
+  "root": "libs/data-access-save-link",
+  "sourceRoot": "libs/data-access-save-link/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/data-access-save-link/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/data-access-save-link"],
+      "options": {
+        "jestConfig": "libs/data-access-save-link/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

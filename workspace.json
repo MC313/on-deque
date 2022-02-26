@@ -3,7 +3,9 @@
   "projects": {
     "context-form": "libs/context-form",
     "context-steps": "libs/context-steps",
+    "data-access-save-link": "libs/data-access-save-link",
     "feature-save-link": "libs/feature-save-link",
+    "feature-save-link-header": "libs/feature-save-link-header",
     "feature-step-one": "libs/feature-step-one",
     "feature-step-three": "libs/feature-step-three",
     "feature-step-two": "libs/feature-step-two",
@@ -12,6 +14,9 @@
     "on-deque-ext-e2e": "apps/on-deque-ext-e2e",
     "on-deque-web": "apps/on-deque-web",
     "on-deque-web-e2e": "apps/on-deque-web-e2e",
+    "shared-util-get-user-id": "libs/shared/util-get-user-id",
+    "shared-util-set-user-id": "libs/shared/util-set-user-id",
+    "ui-back-button": "libs/ui-back-button",
     "ui-button": "libs/ui-button",
     "ui-form-field": "libs/ui-form-field",
     "ui-input": "libs/ui-input",
@@ -19,7 +24,9 @@
     "ui-input-dropdown": "libs/ui-input-dropdown",
     "ui-input-error": "libs/ui-input-error",
     "ui-input-label": "libs/ui-input-label",
+    "ui-review-text": "libs/ui-review-text",
     "ui-step": "libs/ui-step",
-    "util-logger": "libs/util-logger"
+    "ui-steps-indicator": "libs/ui-steps-indicator",
+    "util-logger": "libs/shared/util-logger"
   }
 }

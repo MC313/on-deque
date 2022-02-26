@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "storage": {
+      "LinksTable": [
+        "create",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "DependenciesLayer",
+      "version": 1
+    }
+  ]
+}

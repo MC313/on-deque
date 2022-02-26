@@ -1,3 +1,4 @@
+import { saveLink } from "@on-deque/data-access-save-link";
 import React from "react";
 
 import {
@@ -60,6 +61,11 @@ const formReducer: FormReducer = (state, action) => {
         errors: { ...state.errors, [field]: true },
       };
     }
+    case FormTypeKeys.SUBMIT_FORM:
+      return {
+        ...state,
+        status: "SUBMITTING",
+      };
     case FormTypeKeys.SUBMITTING_FORM:
       return {
         ...state,
@@ -121,6 +127,16 @@ const useFormDispatch = () => {
     );
   }
   return {
+    submitForm: async (payload: FormState["fields"]) => {
+      dispatch({ type: FormTypeKeys.SUBMITTING_FORM });
+      try {
+        await saveLink(payload);
+        dispatch({ type: FormTypeKeys.SET_FORM_SUCCESS });
+        dispatch({ type: FormTypeKeys.RESET_FORM });
+      } catch (error: any) {
+        dispatch({ type: FormTypeKeys.SET_FORM_ERROR, payload: error });
+      }
+    },
     formSubmitting: () =>
       dispatch({
         type: FormTypeKeys.SUBMITTING_FORM,

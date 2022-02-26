@@ -31,9 +31,8 @@ export const InputLabel = ({
 
 const StyledLabel = styled.label<StyledLabelProps>`
   color: ${colors.primary};
-  font-size: ${({ animateLabel }) => animateLabel && fonts.medium};
   transform: ${({ animateLabel }) =>
-    animateLabel ? "translate(5%, 0%)" : "translate(5%, 95%)"};
+    animateLabel ? "translate(0%, 0%) scale(0.9)" : "translate(5%, 70%)"};
   transition: transform 0.5s ease;
   z-index: ${({ floatingLabel }) => (floatingLabel ? "10" : "inherit")};
 `;

@@ -1,0 +1,23 @@
+{
+  "root": "libs/ui-steps-indicator",
+  "sourceRoot": "libs/ui-steps-indicator/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui-steps-indicator/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ui-steps-indicator"],
+      "options": {
+        "jestConfig": "libs/ui-steps-indicator/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

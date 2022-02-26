@@ -3,7 +3,6 @@ import { useSteps } from "@on-deque/context-steps";
 import { Button } from "@on-deque/ui-button";
 import { FormField } from "@on-deque/ui-form-field";
 import { Step } from "@on-deque/ui-step";
-import { logger } from "@on-deque/util-logger";
 
 export const StepOne = () => {
   const [{ errors, fields }, dispatch] = useForm();
@@ -40,7 +39,7 @@ export const StepOne = () => {
         required={false}
         value={fields["tags"] as string}
       />
-      <Button disabled={disableBtn} onClick={nextStep}>
+      <Button align="bottom" disabled={disableBtn} onClick={nextStep}>
         {"Continue ->"}
       </Button>
     </Step>

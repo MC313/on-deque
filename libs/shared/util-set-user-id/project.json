@@ -1,0 +1,25 @@
+{
+  "root": "libs/shared/util-set-user-id",
+  "sourceRoot": "libs/shared/util-set-user-id/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/util-set-user-id/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/util-set-user-id"],
+      "options": {
+        "jestConfig": "libs/shared/util-set-user-id/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -18,18 +18,21 @@ const stepsState = { step: 1, totalSteps: 0 };
  * =======================
  */
 
-const _validateStep = (step: number, total: number) => (newStep: number) => {
-  if (newStep < 1 || newStep > total) {
-    return step;
-  } else {
-    return newStep;
-  }
-};
+const _validateStep =
+  (currentStep: number, total: number) => (newStep: number) => {
+    console.warn("NEW STEP: ", newStep);
+    if (newStep < 1 || newStep > total) {
+      return currentStep;
+    } else {
+      return newStep;
+    }
+  };
 
 const stepsReducer: StepsReducer = (state, action) => {
   const { payload, type } = action;
   const { step, totalSteps } = state;
   const nextStep = step + 1;
+  const previousStep = step - 1;
   const validateStep = _validateStep(step, totalSteps);
 
   switch (type) {
@@ -38,7 +41,13 @@ const stepsReducer: StepsReducer = (state, action) => {
         ...state,
         step: validateStep(payload as number),
       };
+    case StepsTypeKeys.PREVIOUS_STEP:
+      return {
+        ...state,
+        step: validateStep(previousStep),
+      };
     case StepsTypeKeys.NEXT_STEP:
+      console.warn("NEXT STEP.....");
       return {
         ...state,
         step: validateStep(nextStep),
@@ -96,6 +105,10 @@ const useStepsDispatch = () => {
     nextStep: () =>
       dispatch({
         type: StepsTypeKeys.NEXT_STEP,
+      }),
+    previousStep: () =>
+      dispatch({
+        type: StepsTypeKeys.PREVIOUS_STEP,
       }),
     setStep: (payload: number) =>
       dispatch({

@@ -1,0 +1,25 @@
+{
+  "root": "libs/feature-save-link-header",
+  "sourceRoot": "libs/feature-save-link-header/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/feature-save-link-header/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/feature-save-link-header"],
+      "options": {
+        "jestConfig": "libs/feature-save-link-header/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

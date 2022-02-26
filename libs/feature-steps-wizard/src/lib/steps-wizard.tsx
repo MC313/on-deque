@@ -8,10 +8,10 @@ import { flex } from "@styles";
 export const StepsWizard = ({ children }: StepsWizardProps) => {
   const [{ step }] = useSteps();
   const wizardContainer = React.useRef<HTMLUListElement>(null);
-
+  console.log("STEP: ", step);
   React.useLayoutEffect(() => {
     const STEP_WIDTH = 100;
-    const position = STEP_WIDTH * step;
+    const position = STEP_WIDTH * (step - 1);
 
     if (wizardContainer && wizardContainer.current) {
       wizardContainer.current.style.transform = `translateX(-${position}%)`;

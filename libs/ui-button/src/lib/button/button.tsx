@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import { colors, fonts, radius } from "@styles";
 
 export const Button = ({
-  calendar,
   children,
   primary,
   size,
@@ -24,7 +23,7 @@ const StyledButton = styled.button<ButtonProps>`
   color: ${colors.white};
   fontsize: ${fonts.medium};
   height: 50px;
-  margin: 0 auto;
+  margin: ${({ align }) => setAlignment(align)};
   opacity: ${({ disabled }) => (disabled ? 0.7 : 1)};
   transition: background 0.4s ease;
   width: ${({ size }) => (size ? setSize(size) : "94%")};
@@ -32,6 +31,17 @@ const StyledButton = styled.button<ButtonProps>`
     fill: ${colors.black};
   }
 `;
+
+const setAlignment = (alignment: Alignment | undefined) => {
+  switch (alignment) {
+    case "bottom":
+      return "auto auto 0px auto";
+    case "top":
+      return "0px auto auto auto";
+    default:
+      return "0 auto";
+  }
+};
 
 const setSize = (size: ButtonSize | undefined) => {
   switch (size) {
@@ -46,11 +56,13 @@ const setSize = (size: ButtonSize | undefined) => {
   }
 };
 
+type Alignment = "top" | "bottom";
+
 type ButtonSize = "small" | "medium" | "large";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  calendar?: boolean;
+interface ButtonProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "styles"> {
+  align?: Alignment;
   primary?: boolean;
   size?: ButtonSize;
-  styles?: object;
 }
