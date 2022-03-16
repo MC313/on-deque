@@ -1,0 +1,25 @@
+{
+  "root": "libs/feature-calendar/ui-weekdays-label",
+  "sourceRoot": "libs/feature-calendar/ui-weekdays-label/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/feature-calendar/ui-weekdays-label/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/feature-calendar/ui-weekdays-label"],
+      "options": {
+        "jestConfig": "libs/feature-calendar/ui-weekdays-label/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

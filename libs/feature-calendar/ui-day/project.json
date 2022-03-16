@@ -1,0 +1,25 @@
+{
+  "root": "libs/feature-calendar/ui-day",
+  "sourceRoot": "libs/feature-calendar/ui-day/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/feature-calendar/ui-day/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/feature-calendar/ui-day"],
+      "options": {
+        "jestConfig": "libs/feature-calendar/ui-day/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

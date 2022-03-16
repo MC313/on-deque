@@ -1,0 +1,25 @@
+{
+  "root": "libs/feature-calendar/ui-week",
+  "sourceRoot": "libs/feature-calendar/ui-week/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/feature-calendar/ui-week/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/feature-calendar/ui-week"],
+      "options": {
+        "jestConfig": "libs/feature-calendar/ui-week/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -20,6 +20,25 @@
       "@on-deque/data-access-save-link": [
         "libs/data-access-save-link/src/index.ts"
       ],
+      "@on-deque/feature-calendar": ["libs/feature-calendar/src/index.ts"],
+      "@on-deque/feature-calendar/ui-day": [
+        "libs/feature-calendar/ui-day/src/index.ts"
+      ],
+      "@on-deque/feature-calendar/ui-month": [
+        "libs/feature-calendar/ui-month/src/index.ts"
+      ],
+      "@on-deque/feature-calendar/ui-month-label": [
+        "libs/feature-calendar/ui-month-label/src/index.ts"
+      ],
+      "@on-deque/feature-calendar/ui-week": [
+        "libs/feature-calendar/ui-week/src/index.ts"
+      ],
+      "@on-deque/feature-calendar/ui-weekdays-label": [
+        "libs/feature-calendar/ui-weekdays-label/src/index.ts"
+      ],
+      "@on-deque/feature-date-picker": [
+        "libs/feature-date-picker/src/index.ts"
+      ],
       "@on-deque/feature-save-link": ["libs/feature-save-link/src/index.ts"],
       "@on-deque/feature-save-link-header": [
         "libs/feature-save-link-header/src/index.ts"

@@ -1,0 +1,23 @@
+{
+  "root": "libs/feature-date-picker",
+  "sourceRoot": "libs/feature-date-picker/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/feature-date-picker/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/feature-date-picker"],
+      "options": {
+        "jestConfig": "libs/feature-date-picker/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

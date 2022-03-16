@@ -1,0 +1,25 @@
+{
+  "root": "libs/feature-calendar/ui-month-label",
+  "sourceRoot": "libs/feature-calendar/ui-month-label/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/feature-calendar/ui-month-label/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/feature-calendar/ui-month-label"],
+      "options": {
+        "jestConfig": "libs/feature-calendar/ui-month-label/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
