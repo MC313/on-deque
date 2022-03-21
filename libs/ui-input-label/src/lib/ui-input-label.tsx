@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { colors, fonts, margin } from "@styles";
+import { colors } from "@styles";
 
 enum LabelStatus {
   ACTIVE = "ACTIVE",

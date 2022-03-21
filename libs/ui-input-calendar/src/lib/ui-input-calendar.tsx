@@ -2,22 +2,34 @@ import styled from "@emotion/styled";
 
 import calendarImage from "../../calendar.png";
 import { colors, fonts, height, padding, radius } from "@styles";
+import { Button } from "@on-deque/ui-button";
+import React from "react";
 
-export const InputCalendar = (props: InputCalendarProps) => (
-  <StyledInputCalendar placeholder="Select a date" {...props} />
-);
+export const InputCalendar = ({
+  onClick,
+  value,
+  ...props
+}: InputCalendarProps) =>
+  value ? (
+    <StyledCalendarInput
+      onFocus={onClick}
+      value={value}
+      readOnly={true}
+      {...props}
+    />
+  ) : (
+    <StyledCalendarButton onClick={onClick}>Select a date</StyledCalendarButton>
+  );
 
-const StyledInputCalendar = styled.input`
+const StyledCalendarInput = styled.input`
   background: ${colors.inputBackground};
-  background-image: url(../../calendar.png);
-  background-repeat: no-repeat;
   border: 2px solid transparent;
   border-radius: ${radius.medium};
   color: ${colors.primary};
   font-size: ${fonts.medium};
   height: ${height.medium};
   margin: 0px auto;
-  padding-left: ${padding.medium};
+  text-align: center;
   width: 92%;
   &::placeholder {
     color: ${colors.primary};
@@ -25,6 +37,17 @@ const StyledInputCalendar = styled.input`
   }
 `;
 
+const StyledCalendarButton = styled(Button)`
+  background: ${colors.inputBackground};
+  border: 2px solid transparent;
+  box-shadow: none;
+  color: ${colors.primary};
+  font-size: ${fonts.medium};
+  width: 92%;
+`;
+
 /* eslint-disable-next-line */
 export interface InputCalendarProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  onClick: () => void;
+}

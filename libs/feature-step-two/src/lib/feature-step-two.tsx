@@ -1,20 +1,53 @@
+import React from "react";
+
 import styled from "@emotion/styled";
+import { DateObj } from "dayzed";
 
 import { useForm } from "@on-deque/context-form";
 import { useSteps } from "@on-deque/context-steps";
+import { DatePicker } from "@on-deque/feature-date-picker";
 import { Button } from "@on-deque/ui-button";
 import { Input } from "@on-deque/ui-input";
 import { InputCalendar } from "@on-deque/ui-input-calendar";
 import { Dropdown } from "@on-deque/ui-input-dropdown";
 import { InputLabel } from "@on-deque/ui-input-label";
 import { Step } from "@on-deque/ui-step";
-import { colors, flex, fonts, height, margin } from "@styles";
+import { flex, fonts, height, margin } from "@styles";
 
 export const StepTwo = () => {
   const [{ fields }, { setInput }] = useForm();
   const [, { nextStep }] = useSteps();
+  const [datePickerState, setDatePickerState] =
+    React.useState<ActiveState>("INACTIVE");
+  const [selectedDate, setSelectedDate] = React.useState<Date>();
   const { reminderValue } = fields;
   const TIME_UNIT_OPTIONS = ["minute", "hour", "day"];
+
+  const showCalendar = () => {
+    setDatePickerState("ACTIVE");
+  };
+
+  const hideCalendar = () => {
+    setDatePickerState("INACTIVE");
+  };
+
+  const onSelected = ({ date }: DateObj, evt: React.SyntheticEvent) => {
+    evt.preventDefault();
+    setSelectedDate(date);
+    setInput("reminderValue")(date.getMilliseconds());
+    setInput("reminderUnit")("calendar");
+    hideCalendar();
+  };
+
+  const formatDate = (date: Date | undefined) => {
+    if (!date) return;
+    const monthString = date.toLocaleString("default", {
+      month: "long",
+    });
+    const day = date.getDate();
+    const year = date.getUTCFullYear();
+    return `${monthString} ${day} ${year}`;
+  };
 
   return (
     <Step center>
@@ -37,11 +70,23 @@ export const StepTwo = () => {
           />
         </div>
       </StyledFormFieldGroup>
+
       <StyledText>Or</StyledText>
-      <InputCalendar />
+
+      <InputCalendar onClick={showCalendar} value={formatDate(selectedDate)} />
+
       <Button align="bottom" onClick={nextStep}>
         Continue
       </Button>
+
+      <DatePicker
+        active={datePickerState}
+        monthsToDisplay={12}
+        onClose={hideCalendar}
+        selected={selectedDate}
+        onDateSelected={onSelected}
+        showOutsideDays={true}
+      />
     </Step>
   );
 };
@@ -68,3 +113,5 @@ const StyledText = styled.p`
   font-size: ${fonts.medium};
   margin: ${margin.medium} auto;
 `;
+
+type ActiveState = "ACTIVE" | "INACTIVE";

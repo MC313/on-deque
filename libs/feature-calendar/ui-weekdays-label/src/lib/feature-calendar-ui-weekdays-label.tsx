@@ -19,7 +19,10 @@ export interface CalendarWeekdaysLabelProps {
 }
 
 const StyledCalendarWeekdayContainer = styled.div`
-  background: linear-gradient(${colors.white} 70%, rgba(255, 255, 255, 0.5));
+  background: linear-gradient(
+    ${colors.inputBackground} 70%,
+    rgba(255, 255, 255, 0.5)
+  );
   height: 60px;
   margin: auto 5%;
   padding: 20px 0px;

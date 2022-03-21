@@ -29,10 +29,8 @@ export const CalendarWeek = ({ datePropsFn, week }: CalendarWeekProps) => {
 };
 
 const isPastDate = (_date: Date) => {
-  console.info(`DATE: ${_date}`);
   const utcMillisecs = toUTCMilliseconds(_date);
   const todayMillisecs = toUTCMilliseconds(new Date());
-  console.info(`UTC: ${utcMillisecs}`);
   return utcMillisecs < todayMillisecs;
 };
 

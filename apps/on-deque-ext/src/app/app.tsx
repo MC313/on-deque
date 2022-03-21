@@ -3,7 +3,6 @@ import React from "react";
 import { Global } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { DatePicker } from "@on-deque/feature-date-picker";
 import { SaveLink } from "@on-deque/feature-save-link";
 import { reset } from "@styles";
 
@@ -15,10 +14,9 @@ const App = () => {
   return (
     <React.Fragment>
       <Global styles={reset} />
-      <DatePicker monthsToDisplay={12} showOutsideDays={true} />
-      {/* <StyledApp>
+      <StyledApp>
         <SaveLink />
-      </StyledApp> */}
+      </StyledApp>
     </React.Fragment>
   );
 };

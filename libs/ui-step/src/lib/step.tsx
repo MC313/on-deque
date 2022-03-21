@@ -18,4 +18,5 @@ const StyledStep = styled.li<StepProps>`
   margin: 15px 0px;
   min-width: 100%;
   overflow: ${({ scroll }) => (scroll ? "scroll" : "hidden")};
+  position: relative;
 `;

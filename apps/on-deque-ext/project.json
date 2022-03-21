@@ -22,7 +22,8 @@
           "apps/on-deque-ext/src/assets",
           "apps/on-deque-ext/src/manifest.json",
           "apps/on-deque-ext/src/index.css",
-          "apps/on-deque-ext/src/background.js"
+          "apps/on-deque-ext/src/background.js",
+          "apps/on-deque-ext/src/global.js"
         ],
         "styles": [],
         "scripts": [],

@@ -1,14 +1,9 @@
 import styled from "@emotion/styled";
-import { CalendarDay } from "@on-deque/feature-calendar/ui-day";
 import { CalendarMonth } from "@on-deque/feature-calendar/ui-month";
 import { CalendarMonthLabel } from "@on-deque/feature-calendar/ui-month-label";
 import { CalendarWeek } from "@on-deque/feature-calendar/ui-week";
 import { CalendarWeekdaysLabel } from "@on-deque/feature-calendar/ui-weekdays-label";
-import Dayzed, {
-  DateObj,
-  RenderProps as DayzedRenderProps,
-  useDayzed,
-} from "dayzed";
+import { RenderProps as DayzedRenderProps } from "dayzed";
 import React from "react";
 
 import {
@@ -39,10 +34,9 @@ export const Calendar = ({
   );
 };
 
-/* eslint-disable-next-line */
-export interface CalendarProps {}
-
 const StyledCalendar = styled.div`
+  height: 100%;
+  overflow-y: scroll;
   text-align: center;
   width: 100%;
   & > div:nth-child(2) {
