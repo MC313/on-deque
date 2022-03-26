@@ -9,7 +9,7 @@ import { colors } from "@styles";
 
 export function DatePicker({ active, onClose, ...props }: DatePickerProps) {
   const dayzedData = useDayzed(props);
-  const datePicker = React.useRef<HTMLDivElement>(null);
+  const datePickerRef = React.useRef<HTMLDivElement>(null);
   const [activeState, setActiveState] = React.useState<ActiveStateValue>(
     ACTIVE_TYPES["INACTIVE"]
   );
@@ -26,12 +26,12 @@ export function DatePicker({ active, onClose, ...props }: DatePickerProps) {
   }, [active]);
 
   React.useLayoutEffect(() => {
-    if (!datePicker || !datePicker.current) return;
-    datePicker.current.style.transform = `translateY(${activeState.value}%)`;
+    if (!datePickerRef || !datePickerRef.current) return;
+    datePickerRef.current.style.transform = `translateY(${activeState.value}%)`;
   }, [activeState]);
 
   return (
-    <StyledDatePicker ref={datePicker}>
+    <StyledDatePicker ref={datePickerRef}>
       <CloseButton aria-label="close-calendar" onClick={handleClose} />
       <Calendar {...dayzedData} />
     </StyledDatePicker>
@@ -45,6 +45,7 @@ const StyledDatePicker = styled.div`
   position: absolute;
   top: 0;
   transform: translateY(0%);
+  transition: transform 0.4s ease-in;
   width: 100%;
 `;
 

@@ -20,7 +20,6 @@ const stepsState = { step: 1, totalSteps: 0 };
 
 const _validateStep =
   (currentStep: number, total: number) => (newStep: number) => {
-    console.warn("NEW STEP: ", newStep);
     if (newStep < 1 || newStep > total) {
       return currentStep;
     } else {
@@ -47,7 +46,6 @@ const stepsReducer: StepsReducer = (state, action) => {
         step: validateStep(previousStep),
       };
     case StepsTypeKeys.NEXT_STEP:
-      console.warn("NEXT STEP.....");
       return {
         ...state,
         step: validateStep(nextStep),

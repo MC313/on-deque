@@ -1,0 +1,25 @@
+{
+  "root": "libs/shared/util-format-date",
+  "sourceRoot": "libs/shared/util-format-date/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/util-format-date/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/util-format-date"],
+      "options": {
+        "jestConfig": "libs/shared/util-format-date/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

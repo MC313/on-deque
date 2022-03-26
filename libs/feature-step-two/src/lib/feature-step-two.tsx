@@ -6,6 +6,10 @@ import { DateObj } from "dayzed";
 import { useForm } from "@on-deque/context-form";
 import { useSteps } from "@on-deque/context-steps";
 import { DatePicker } from "@on-deque/feature-date-picker";
+import {
+  dateToUTCMilliseconds,
+  formatDate,
+} from "@on-deque/shared/util-format-date";
 import { Button } from "@on-deque/ui-button";
 import { Input } from "@on-deque/ui-input";
 import { InputCalendar } from "@on-deque/ui-input-calendar";
@@ -15,11 +19,11 @@ import { Step } from "@on-deque/ui-step";
 import { flex, fonts, height, margin } from "@styles";
 
 export const StepTwo = () => {
-  const [{ fields }, { setInput }] = useForm();
-  const [, { nextStep }] = useSteps();
   const [datePickerState, setDatePickerState] =
     React.useState<ActiveState>("INACTIVE");
   const [selectedDate, setSelectedDate] = React.useState<Date>();
+  const [{ fields }, { setInput }] = useForm();
+  const [, { nextStep }] = useSteps();
   const { reminderValue } = fields;
   const TIME_UNIT_OPTIONS = ["minute", "hour", "day"];
 
@@ -34,19 +38,11 @@ export const StepTwo = () => {
   const onSelected = ({ date }: DateObj, evt: React.SyntheticEvent) => {
     evt.preventDefault();
     setSelectedDate(date);
-    setInput("reminderValue")(date.getMilliseconds());
-    setInput("reminderUnit")("calendar");
-    hideCalendar();
-  };
-
-  const formatDate = (date: Date | undefined) => {
-    if (!date) return;
-    const monthString = date.toLocaleString("default", {
-      month: "long",
+    setInput("reminderValue")({
+      target: { value: dateToUTCMilliseconds(date) },
     });
-    const day = date.getDate();
-    const year = date.getUTCFullYear();
-    return `${monthString} ${day} ${year}`;
+    setInput("reminderUnit")({ target: { value: "calendar" } });
+    hideCalendar();
   };
 
   return (

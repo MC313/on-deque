@@ -1,16 +1,20 @@
+import { ReminderUnit } from "@on-deque/ui-form-field";
+
 export type SubmitStatus = "INITIAL" | "ERROR" | "SUBMITTING" | "SUCCESS";
 
 export interface FormFields {
   url: string;
   description?: string;
   tags?: string;
-  reminderUnit?: string;
-  reminderValue?: number;
+  reminderUnit: ReminderUnit;
+  reminderValue: number;
 }
 
 export type FormFieldKeys = keyof FormFields;
 
-export interface FormFieldsErrors extends Omit<FormFields, "reminderValue"> {
+export interface FormFieldsErrors
+  extends Omit<FormFields, "reminderValue" | "reminderUnit"> {
+  reminderUnit: string;
   reminderValue: string;
 }
 

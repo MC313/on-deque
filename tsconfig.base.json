@@ -20,6 +20,7 @@
       "@on-deque/data-access-save-link": [
         "libs/data-access-save-link/src/index.ts"
       ],
+      "@on-deque/data-use-user-id": ["libs/data-use-user-id/src/index.ts"],
       "@on-deque/feature-calendar": ["libs/feature-calendar/src/index.ts"],
       "@on-deque/feature-calendar/ui-day": [
         "libs/feature-calendar/ui-day/src/index.ts"
@@ -49,6 +50,18 @@
       "@on-deque/feature-steps-wizard": [
         "libs/feature-steps-wizard/src/index.ts"
       ],
+      "@on-deque/shared/util-capitalize": [
+        "libs/shared/util-capitalize/src/index.ts"
+      ],
+      "@on-deque/shared/util-format-date": [
+        "libs/shared/util-format-date/src/index.ts"
+      ],
+      "@on-deque/shared/util-format-link-payload": [
+        "libs/shared/util-format-link-payload/src/index.ts"
+      ],
+      "@on-deque/shared/util-format-reminder-text": [
+        "libs/shared/util-format-reminder-text/src/index.ts"
+      ],
       "@on-deque/shared/util-get-user-id": [
         "libs/shared/util-get-user-id/src/index.ts"
       ],
@@ -68,6 +81,7 @@
       "@on-deque/ui-review-text": ["libs/ui-review-text/src/index.ts"],
       "@on-deque/ui-step": ["libs/ui-step/src/index.ts"],
       "@on-deque/ui-steps-indicator": ["libs/ui-steps-indicator/src/index.ts"],
+      "@on-deque/ui-submit-button": ["libs/ui-submit-button/src/index.ts"],
       "@on-deque/util-logger": ["libs/shared/util-logger/src/index.ts"],
       "@styles": ["styles/index.ts"]
     }

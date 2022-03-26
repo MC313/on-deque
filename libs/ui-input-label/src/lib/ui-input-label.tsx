@@ -33,7 +33,7 @@ const StyledLabel = styled.label<StyledLabelProps>`
   color: ${colors.primary};
   transform: ${({ animateLabel }) =>
     animateLabel ? "translate(0%, 0%) scale(0.9)" : "translate(5%, 70%)"};
-  transition: transform 0.5s ease;
+  transition: transform 0.2s linear;
   z-index: ${({ floatingLabel }) => (floatingLabel ? "10" : "inherit")};
 `;
 

@@ -3,6 +3,7 @@ import React from "react";
 import { DateObj, GetDatePropsOptions } from "dayzed";
 
 import { CalendarDay } from "@on-deque/feature-calendar/ui-day";
+import { dateToUTCMilliseconds } from "@on-deque/shared/util-format-date";
 import { colors } from "@styles";
 
 export const CalendarWeek = ({ datePropsFn, week }: CalendarWeekProps) => {
@@ -11,7 +12,7 @@ export const CalendarWeek = ({ datePropsFn, week }: CalendarWeekProps) => {
       {week.map((dateObj: string | DateObj, index: number) => {
         if (!dateObj || typeof dateObj === "string") return;
         const { date, selected, today } = dateObj;
-        const background = today || selected ? colors.primary : "transparent";
+        const background = selected ? colors.primary : "transparent";
         const dateValue = date?.getDate();
 
         return (
@@ -19,6 +20,7 @@ export const CalendarWeek = ({ datePropsFn, week }: CalendarWeekProps) => {
             key={index}
             background={background}
             dayData={datePropsFn({ dateObj })}
+            today={today}
             value={dateValue}
             pastDate={isPastDate(date)}
           />
@@ -29,14 +31,10 @@ export const CalendarWeek = ({ datePropsFn, week }: CalendarWeekProps) => {
 };
 
 const isPastDate = (_date: Date) => {
-  const utcMillisecs = toUTCMilliseconds(_date);
-  const todayMillisecs = toUTCMilliseconds(new Date());
-  return utcMillisecs < todayMillisecs;
+  const dateMillisecs = dateToUTCMilliseconds(_date);
+  const todayMillisecs = dateToUTCMilliseconds(new Date());
+  return dateMillisecs < todayMillisecs;
 };
-
-const toUTCMilliseconds = (date: Date): number =>
-  date &&
-  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date?.getUTCDay());
 
 /* eslint-disable-next-line */
 export interface CalendarWeekProps {

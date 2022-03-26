@@ -1,0 +1,23 @@
+{
+  "root": "libs/shared/util-capitalize",
+  "sourceRoot": "libs/shared/util-capitalize/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/util-capitalize/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/util-capitalize"],
+      "options": {
+        "jestConfig": "libs/shared/util-capitalize/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@
     "context-form": "libs/context-form",
     "context-steps": "libs/context-steps",
     "data-access-save-link": "libs/data-access-save-link",
+    "data-use-user-id": "libs/data-use-user-id",
     "feature-calendar": "libs/feature-calendar",
     "feature-calendar-ui-day": "libs/feature-calendar/ui-day",
     "feature-calendar-ui-month": "libs/feature-calendar/ui-month",
@@ -21,6 +22,10 @@
     "on-deque-ext-e2e": "apps/on-deque-ext-e2e",
     "on-deque-web": "apps/on-deque-web",
     "on-deque-web-e2e": "apps/on-deque-web-e2e",
+    "shared-util-capitalize": "libs/shared/util-capitalize",
+    "shared-util-format-date": "libs/shared/util-format-date",
+    "shared-util-format-link-payload": "libs/shared/util-format-link-payload",
+    "shared-util-format-reminder-text": "libs/shared/util-format-reminder-text",
     "shared-util-get-user-id": "libs/shared/util-get-user-id",
     "shared-util-set-user-id": "libs/shared/util-set-user-id",
     "ui-back-button": "libs/ui-back-button",
@@ -36,6 +41,7 @@
     "ui-review-text": "libs/ui-review-text",
     "ui-step": "libs/ui-step",
     "ui-steps-indicator": "libs/ui-steps-indicator",
+    "ui-submit-button": "libs/ui-submit-button",
     "util-logger": "libs/shared/util-logger"
   }
 }

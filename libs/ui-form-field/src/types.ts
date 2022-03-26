@@ -5,10 +5,6 @@ const reminderUnits = [
   "hours",
   "day",
   "days",
-  "week",
-  "weeks",
-  "month",
-  "months",
 ] as const;
 
 export interface FormData {
@@ -28,8 +24,4 @@ export const REMINDER_UNITS: ReminderUnit[] = [
   "hours",
   "day",
   "days",
-  "week",
-  "weeks",
-  "month",
-  "months",
 ];

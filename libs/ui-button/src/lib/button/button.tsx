@@ -60,7 +60,7 @@ type Alignment = "top" | "bottom";
 
 type ButtonSize = "small" | "medium" | "large";
 
-interface ButtonProps
+export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "styles"> {
   align?: Alignment;
   primary?: boolean;

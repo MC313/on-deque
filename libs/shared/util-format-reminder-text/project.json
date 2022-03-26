@@ -1,0 +1,25 @@
+{
+  "root": "libs/shared/util-format-reminder-text",
+  "sourceRoot": "libs/shared/util-format-reminder-text/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/util-format-reminder-text/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/util-format-reminder-text"],
+      "options": {
+        "jestConfig": "libs/shared/util-format-reminder-text/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ export const CalendarDay = ({
   background,
   dayData,
   pastDate,
+  today,
   value,
 }: CalendarDayProps) => {
   return (
@@ -14,6 +15,7 @@ export const CalendarDay = ({
       background={background}
       disabled={pastDate}
       pastDate={pastDate}
+      today={today}
     >
       {value}
     </StyledCalendarDay>
@@ -25,20 +27,28 @@ export interface CalendarDayProps extends React.HTMLProps<HTMLButtonElement> {
   background: string;
   dayData: object;
   pastDate: boolean;
+  today: boolean;
   value: string | number;
 }
 
 const setColor = ({ background, pastDate }: StyledCalendarDayProps) => {
-  if (pastDate) return colors.grey;
-  if (background !== "transparent") return colors.white;
-  return colors.almostBlack;
+  if (pastDate) {
+    return colors.grey;
+  } else if (background !== "transparent") {
+    return colors.white;
+  } else {
+    return colors.almostBlack;
+  }
 };
 
-type StyledCalendarDayProps = Pick<CalendarDayProps, "background" | "pastDate">;
+type StyledCalendarDayProps = Pick<
+  CalendarDayProps,
+  "background" | "pastDate" | "today"
+>;
 
 const StyledCalendarDay = styled.button<StyledCalendarDayProps>`
   background: ${({ background }) => background};
-  border: 1px solid ${({ background }) => background};
+  border: 2px solid ${({ today }) => (today ? colors.primary : "transparent")};
   border-radius: 50%;
   color: ${setColor};
   display: inline-block;

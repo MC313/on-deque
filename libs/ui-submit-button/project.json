@@ -1,0 +1,23 @@
+{
+  "root": "libs/ui-submit-button",
+  "sourceRoot": "libs/ui-submit-button/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui-submit-button/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ui-submit-button"],
+      "options": {
+        "jestConfig": "libs/ui-submit-button/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
