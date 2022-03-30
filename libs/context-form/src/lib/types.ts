@@ -8,12 +8,16 @@ export interface FormFields {
   tags?: string;
   reminderUnit: ReminderUnit;
   reminderValue: number;
+  datePickerValue?: string;
 }
 
 export type FormFieldKeys = keyof FormFields;
 
 export interface FormFieldsErrors
-  extends Omit<FormFields, "reminderValue" | "reminderUnit"> {
+  extends Omit<
+    FormFields,
+    "reminderValue" | "reminderUnit" | "datePickerValue"
+  > {
   reminderUnit: string;
   reminderValue: string;
 }

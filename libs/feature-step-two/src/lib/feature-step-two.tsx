@@ -8,7 +8,7 @@ import { useSteps } from "@on-deque/context-steps";
 import { DatePicker } from "@on-deque/feature-date-picker";
 import {
   dateToUTCMilliseconds,
-  formatDate,
+  toReadableDate,
 } from "@on-deque/shared/util-format-date";
 import { Button } from "@on-deque/ui-button";
 import { Input } from "@on-deque/ui-input";
@@ -23,8 +23,8 @@ export const StepTwo = () => {
     React.useState<ActiveState>("INACTIVE");
   const [selectedDate, setSelectedDate] = React.useState<Date>();
   const [{ fields }, { setInput }] = useForm();
-  const [, { nextStep }] = useSteps();
   const { reminderValue } = fields;
+  const [, { nextStep }] = useSteps();
   const TIME_UNIT_OPTIONS = ["minute", "hour", "day"];
 
   const showCalendar = () => {
@@ -38,12 +38,13 @@ export const StepTwo = () => {
   const onSelected = ({ date }: DateObj, evt: React.SyntheticEvent) => {
     evt.preventDefault();
     setSelectedDate(date);
-    setInput("reminderValue")({
+    setInput("datePickerValue")({
       target: { value: dateToUTCMilliseconds(date) },
     });
-    setInput("reminderUnit")({ target: { value: "calendar" } });
     hideCalendar();
   };
+
+  const formattedDate = selectedDate && toReadableDate(selectedDate);
 
   return (
     <Step center>
@@ -69,7 +70,7 @@ export const StepTwo = () => {
 
       <StyledText>Or</StyledText>
 
-      <InputCalendar onClick={showCalendar} value={formatDate(selectedDate)} />
+      <InputCalendar onClick={showCalendar} value={formattedDate} />
 
       <Button align="bottom" onClick={nextStep}>
         Continue

@@ -43,7 +43,7 @@ type UseValidateInputReturn = Readonly<
 
 type InputError = undefined | string;
 
-type FormSchema = yup.SchemaOf<FormData>;
+type FormSchema = yup.SchemaOf<Omit<FormData, "datePickerValue">>;
 
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 

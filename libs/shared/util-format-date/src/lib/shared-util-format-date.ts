@@ -1,32 +1,37 @@
 export const toUtcTime = (timeValue: number, timeUnit: TimeUnit) => {
   if (!timeValue) return undefined;
-  if (timeUnit === "calendar") return timeValue;
-  return Date.now() + _unitToMilliseconds(timeValue, timeUnit);
+  return Date.now() + unitToMilliseconds(timeValue, timeUnit);
 };
 
 export const dateToUTCMilliseconds = (date: Date): number =>
   date &&
   Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date?.getUTCDate());
 
-export const formatDate = (date: Date | undefined) => {
-  if (!date) return;
-  const { year, dayOfMonth } = _parseDate(date);
-  const monthString = date.toLocaleString("default", {
-    month: "long",
-  });
-  return `${dayOfMonth} ${monthString} ${year}`;
+export const millisecondsToDate = (milliseconds: string | undefined) => {
+  if (!milliseconds) return;
+  const date = new Date(+milliseconds);
+  return toReadableDate(date);
 };
 
-const _parseDate = (date: Date) => ({
+export const formatDate = (date: Date | undefined) => {
+  if (!date) return;
+  return toReadableDate(date);
+};
+
+export const unitToMilliseconds = (timeValue: number, timeUnit: TimeUnit) =>
+  timeValue * getMillisecByUnit[timeUnit];
+
+export const toReadableDate = (date: Date) => {
+  const { day, month, year } = parseDate(date);
+  return `${month} - ${day} - ${year}`;
+};
+const parseDate = (date: Date) => ({
   year: date.getUTCFullYear(),
-  month: date.getUTCMonth(),
-  dayOfMonth: date.getUTCDate(),
+  month: date.toLocaleString("en-US", { month: "long" }),
+  day: date.getUTCDate(),
 });
 
-const _unitToMilliseconds = (timeValue: number, timeUnit: TimeUnit) =>
-  timeValue * _getMillisecByUnit[timeUnit];
-
-const _getMillisecByUnit: GetMillisecByUnit = {
+const getMillisecByUnit: GetMillisecByUnit = {
   minute: 60000,
   minutes: 60000,
   hour: 60000 * 60,
@@ -44,4 +49,4 @@ interface GetMillisecByUnit {
   days: number;
 }
 
-export type TimeUnit = keyof GetMillisecByUnit & "calendar";
+export type TimeUnit = keyof GetMillisecByUnit;

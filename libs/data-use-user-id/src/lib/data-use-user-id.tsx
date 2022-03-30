@@ -4,8 +4,8 @@ const isExtension = (): boolean => !!document.querySelector(".extension");
 const appType = isExtension() ? "EXTENSION" : "WEB";
 console.warn("APP TYPE: ", appType);
 
-export const useUserId = (): [string | undefined, (userId: string) => void] => {
-  let userId = getUserId();
+export const useUserId = (): [string, (userId: string) => void] => {
+  let userId: string = getUserId();
   if (!userId) {
     const _userId = `GUEST_${Date.now()}`;
     setUserId(_userId);
@@ -14,9 +14,9 @@ export const useUserId = (): [string | undefined, (userId: string) => void] => {
   return [userId, setUserId];
 };
 
-const getUserId = (): string | undefined => {
-  type UserId = { userId: string | undefined };
-  let _userId = undefined;
+const getUserId = (): string => {
+  type UserId = { userId: string };
+  let _userId = "";
 
   switch (appType) {
     case "EXTENSION":
@@ -27,10 +27,9 @@ const getUserId = (): string | undefined => {
       );
       break;
     case "WEB":
-      _userId = localStorage.getItem("userId") || undefined;
+      _userId = localStorage.getItem("userId") || "";
       break;
   }
-  console.log("GET USERID: ", _userId);
   return _userId;
 };
 

@@ -12,6 +12,7 @@ export interface FormData {
   tags?: string;
   reminderUnit: ReminderUnit;
   reminderValue: number;
+  datePickerValue?: string;
   description?: string;
 }
 

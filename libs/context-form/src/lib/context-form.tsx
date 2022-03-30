@@ -24,6 +24,7 @@ const initialForm: FormState = {
     tags: "",
     reminderUnit: "minute",
     reminderValue: 0,
+    datePickerValue: undefined,
   },
   errors: {
     url: "",
@@ -128,17 +129,13 @@ const useFormDispatch = () => {
   }
   return {
     submitForm: async (payload: FormState["fields"]) => {
-      console.warn("inside submit 0");
       dispatch({ type: FormTypeKeys.SUBMITTING_FORM });
       try {
-        console.warn("inside submit 1");
         await saveLink(payload);
         dispatch({ type: FormTypeKeys.SET_FORM_SUCCESS });
         dispatch({ type: FormTypeKeys.RESET_FORM });
-        console.warn("inside submit 2");
       } catch (error: any) {
-        dispatch({ type: FormTypeKeys.SET_FORM_ERROR, payload: error });
-        console.warn("inside submit 3");
+        dispatch({ type: FormTypeKeys.SET_FORM_ERROR, payload: error.message });
       }
     },
     formSubmitting: () =>
