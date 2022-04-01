@@ -1,0 +1,23 @@
+{
+  "root": "libs/success-popover",
+  "sourceRoot": "libs/success-popover/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/success-popover/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/success-popover"],
+      "options": {
+        "jestConfig": "libs/success-popover/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

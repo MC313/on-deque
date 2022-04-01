@@ -68,6 +68,7 @@
       "@on-deque/shared/util-set-user-id": [
         "libs/shared/util-set-user-id/src/index.ts"
       ],
+      "@on-deque/success-popover": ["libs/success-popover/src/index.ts"],
       "@on-deque/ui-back-button": ["libs/ui-back-button/src/index.ts"],
       "@on-deque/ui-button": ["libs/ui-button/src/index.ts"],
       "@on-deque/ui-close-button": ["libs/ui-close-button/src/index.ts"],

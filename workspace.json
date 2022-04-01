@@ -28,6 +28,7 @@
     "shared-util-format-reminder-text": "libs/shared/util-format-reminder-text",
     "shared-util-get-user-id": "libs/shared/util-get-user-id",
     "shared-util-set-user-id": "libs/shared/util-set-user-id",
+    "success-popover": "libs/success-popover",
     "ui-back-button": "libs/ui-back-button",
     "ui-button": "libs/ui-button",
     "ui-close-button": "libs/ui-close-button",

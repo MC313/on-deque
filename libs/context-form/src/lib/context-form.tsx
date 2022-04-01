@@ -45,7 +45,9 @@ const formReducer: FormReducer = (state, action) => {
   switch (type) {
     case FormTypeKeys.RESET_FORM:
       return {
-        ...initialForm,
+        ...state,
+        fields: initialForm.fields,
+        errors: initialForm.errors,
       };
     case FormTypeKeys.SET_INPUT_VALUE: {
       const { field, value } = payload as SetInputValueAction["payload"];

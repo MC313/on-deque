@@ -7,13 +7,16 @@ import { StepOne } from "@on-deque/feature-step-one";
 import { StepThree } from "@on-deque/feature-step-three";
 import { StepTwo } from "@on-deque/feature-step-two";
 import { StepsWizard } from "@on-deque/feature-steps-wizard";
+import { SuccessPopover } from "@on-deque/success-popover";
+
 import { flex } from "@styles";
 
 export const SaveLink = () => {
   return (
     <StepsProvider totalSteps={3}>
-      <SaveLinkHeader />
       <FormProvider>
+        <SuccessPopover />
+        <SaveLinkHeader />
         <Styledform>
           <StepsWizard>
             <StepOne />
