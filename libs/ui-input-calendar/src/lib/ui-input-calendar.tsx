@@ -1,9 +1,9 @@
+import React from "react";
+
 import styled from "@emotion/styled";
 
-import calendarImage from "../../calendar.png";
-import { colors, fonts, height, padding, radius } from "@styles";
+import { colors, fonts, height, radius } from "@styles";
 import { Button } from "@on-deque/ui-button";
-import React from "react";
 
 export const InputCalendar = ({
   onClick,

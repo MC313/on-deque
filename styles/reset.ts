@@ -142,4 +142,8 @@ export default css`
   button:hover {
     cursor: pointer;
   }
+
+  button:hover:disabled {
+    cursor: not-allowed;
+  }
 `;

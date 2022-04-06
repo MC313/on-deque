@@ -26,8 +26,9 @@ export function DatePicker({ active, onClose, ...props }: DatePickerProps) {
   }, [active]);
 
   React.useLayoutEffect(() => {
-    if (!datePickerRef || !datePickerRef.current) return;
-    datePickerRef.current.style.transform = `translateY(${activeState.value}%)`;
+    if (datePickerRef && datePickerRef.current) {
+      datePickerRef.current.style.transform = `translateY(${activeState.value}%)`;
+    }
   }, [activeState]);
 
   return (
@@ -39,7 +40,8 @@ export function DatePicker({ active, onClose, ...props }: DatePickerProps) {
 }
 
 const StyledDatePicker = styled.div`
-  background: ${colors.inputBackground};
+  background: ${colors.white};
+  border-top: 2px solid ${colors.black};
   height: 380px;
   left: 0;
   position: absolute;

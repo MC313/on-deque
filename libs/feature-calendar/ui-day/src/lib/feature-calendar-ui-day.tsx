@@ -33,7 +33,7 @@ export interface CalendarDayProps extends React.HTMLProps<HTMLButtonElement> {
 
 const setColor = ({ background, pastDate }: StyledCalendarDayProps) => {
   if (pastDate) {
-    return colors.grey;
+    return colors.lightGrey;
   } else if (background !== "transparent") {
     return colors.white;
   } else {
