@@ -52,7 +52,7 @@ const createReviewElement = (arr: FieldTuple, index: number) => {
 };
 
 const LinkContent = styled.div`
-  height: 300px;
+  height: 250px;
   overflow-y: scroll;
 `;
 

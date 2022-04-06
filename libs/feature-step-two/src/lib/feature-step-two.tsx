@@ -17,6 +17,7 @@ import { Dropdown } from "@on-deque/ui-input-dropdown";
 import { InputLabel } from "@on-deque/ui-input-label";
 import { Step } from "@on-deque/ui-step";
 import { flex, fonts, height, margin } from "@styles";
+import { IconTimeToLeave } from "@aws-amplify/ui-react";
 
 export const StepTwo = () => {
   const [datePickerState, setDatePickerState] =
@@ -49,7 +50,7 @@ export const StepTwo = () => {
   return (
     <Step center>
       <StyledFormFieldGroup>
-        <InputLabel label="Send me a remind me about this link in" />
+        <StyledLabel label="Send me a remind me about this link in" />
         <div>
           <Input
             id="reminderValue"
@@ -104,6 +105,10 @@ const StyledFormFieldGroup = styled.div`
     height: ${height.medium};
     width: 60%;
   }
+`;
+
+const StyledLabel = styled(InputLabel)`
+  margin-left: 25px;
 `;
 
 const StyledText = styled.p`

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { colors } from "@styles";
+import { colors, fonts } from "@styles";
 
 enum LabelStatus {
   ACTIVE = "ACTIVE",
@@ -29,10 +29,20 @@ export const InputLabel = ({
   );
 };
 
+const setColor = ({ floatingLabel, animateLabel }: StyledLabelProps) => {
+  if (floatingLabel && !animateLabel) {
+    return `${colors.grey}`;
+  } else {
+    return `${colors.primary}`;
+  }
+};
+
 const StyledLabel = styled.label<StyledLabelProps>`
-  color: ${colors.primary};
+  color: ${({ animateLabel, floatingLabel }) =>
+    setColor({ floatingLabel, animateLabel })};
+  font-size: ${fonts.medium};
   transform: ${({ animateLabel }) =>
-    animateLabel ? "translate(0%, 0%) scale(0.9)" : "translate(5%, 70%)"};
+    animateLabel ? "translate(5%, 0%)" : "translate(5%, 70%)"};
   transition: transform 0.2s linear;
   z-index: ${({ floatingLabel }) => (floatingLabel ? "10" : "inherit")};
 `;

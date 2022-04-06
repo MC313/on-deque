@@ -40,7 +40,7 @@ export const StepOne = () => {
         value={fields["tags"] as string}
       />
       <Button align="bottom" disabled={disableBtn} onClick={nextStep}>
-        {"Continue ->"}
+        Continue
       </Button>
     </Step>
   );

@@ -38,6 +38,7 @@ export const FormField = ({
   const [inputStatus, setInputStatus] = React.useState<InputStatus>(
     InputStatus.BLUR
   );
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
   const [error, validateInput] = useValidateInput(name, onError);
 
   const onBlur = (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -54,9 +55,17 @@ export const FormField = ({
     setLabelStatus(status);
   }, [value, inputStatus]);
 
+  React.useLayoutEffect(() => {
+    const borderColor =
+      inputStatus === InputStatus.FOCUS ? colors.primary : "transparent";
+    if (wrapperRef && wrapperRef.current) {
+      wrapperRef.current.style.border = `2px solid ${borderColor}`;
+    }
+  }, [inputStatus]);
+
   return (
     <StyledFormField isFloatingLabel={isFloatingLabel} styles={styles}>
-      <LabelInputWrapper>
+      <LabelInputWrapper ref={wrapperRef}>
         {label && (
           <InputLabel
             htmlFor={name}
@@ -99,7 +108,7 @@ const labelInputWrapperStyles = css`
   ${flex.column};
   background: ${colors.inputBackground};
   border-radius: ${radius.large};
-  height: 60px;
+  height: 55px;
   justify-content: end;
   padding-top: 5px;
 `;
