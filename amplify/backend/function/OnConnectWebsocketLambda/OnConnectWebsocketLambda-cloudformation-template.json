@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "Lambda Function resource for connecting to the LinksLockerWebSocket API",
   "Parameters": {
     "env": {
       "Type": "String"

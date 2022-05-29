@@ -12,19 +12,30 @@
       "AmplifyAppId": "d1eqn8cswcrqkq"
     },
     "categories": {
+      "auth": {
+        "userPoolGroups": {},
+        "LinksLockerAuth": {}
+      },
       "function": {
+        "SaveLinkLambda": {
+          "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
+          "s3Key": "amplify-builds/SaveLinkLambda-68306d4b4575656f4872-build.zip"
+        },
+        "ListUserLinksLambda": {
+          "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
+          "s3Key": "amplify-builds/ListUserLinksLambda-5579717761644c6f556d-build.zip"
+        },
+        "DependenciesLayer": {
+          "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
+          "s3Key": "amplify-builds/DependenciesLayer-LambdaLayerVersion610b510b-build.zip"
+        },
         "LinksLockerAuthPostConfirmation": {
-          "GROUP": "AuthenticatedUsers",
           "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
           "s3Key": "amplify-builds/LinksLockerAuthPostConfirmation-4b5753432f6751593934-build.zip"
         },
         "ScheduleReminderLambda": {
           "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
-          "s3Key": "amplify-builds/ScheduleReminderLambda-70546d42703361527a41-build.zip"
-        },
-        "SaveLinkLambda": {
-          "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
-          "s3Key": "amplify-builds/SaveLinkLambda-68306d4b4575656f4872-build.zip"
+          "s3Key": "amplify-builds/ScheduleReminderLambda-653279514650366a5177-build.zip"
         },
         "OnConnectWebsocketLambda": {
           "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
@@ -36,24 +47,12 @@
         },
         "SendWebNotficationLambda": {
           "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
-          "s3Key": "amplify-builds/SendWebNotficationLambda-5931346e32376c5a4a72-build.zip"
-        },
-        "ListUserLinksLambda": {
-          "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
-          "s3Key": "amplify-builds/ListUserLinksLambda-5579717761644c6f556d-build.zip"
-        },
-        "DependenciesLayer": {
-          "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
-          "s3Key": "amplify-builds/DependenciesLayer-LambdaLayerVersiondaac9ebc-build.zip"
+          "s3Key": "amplify-builds/SendWebNotficationLambda-5a4b61764946636a6951-build.zip"
         },
         "NotificationLambda": {
           "deploymentBucketName": "amplify-linkslocker-dev-14320-deployment",
           "s3Key": "amplify-builds/NotificationLambda-67326d4a547433617a37-build.zip"
         }
-      },
-      "auth": {
-        "LinksLockerAuth": {},
-        "userPoolGroups": {}
       }
     }
   }

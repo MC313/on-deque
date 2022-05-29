@@ -1,4 +1,10 @@
 /* Amplify Params - DO NOT EDIT
+    ENV
+    REGION
+    STORAGE_WEBSOCKETCONNECTIONIDTABLE_ARN
+    STORAGE_WEBSOCKETCONNECTIONIDTABLE_NAME
+    STORAGE_WEBSOCKETCONNECTIONIDTABLE_STREAMARN
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
     API_LINKSLOCKERWEBSOCKETAPI_APIID
     API_LINKSLOCKERWEBSOCKETAPI_APINAME
     STORAGE_WEBSOCKETCONNECTIONIDTABLE_ARN
@@ -23,7 +29,7 @@ exports.handler = async ({ Records }) => {
             const { userId, ...linkInfo } = message;
             const connectionId = await getConnectionId(userId)
             const result = await publishToWebSocket(connectionId, linkInfo)
-            console.log(`Notification published to connectionId: ${connectionId} successfully!!`, result)
+            console.log(`Notification published to connectionId: ${connectionId} successfully!!\n Notification: ${result}`)
         }
     } catch (error) {
         console.error(`Error publishing notification. ${error}`)

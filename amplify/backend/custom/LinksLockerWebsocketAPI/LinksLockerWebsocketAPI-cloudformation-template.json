@@ -1,0 +1,385 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.0.2\",\"stackType\":\"custom-customCloudformation\",\"metadata\":{}}",
+  "Parameters": {
+    "env": {
+      "Type": "String"
+    },
+    "ApiName": {
+      "Type": "String",
+      "Default": "LinksLockerWebsocketAPI"
+    },
+    "functionOnConnectWebsocketLambdaName": {
+      "Type": "String",
+      "Description": "Input parameter describing Name attribute for function/OnConnectWebsocketLambda resource"
+    },
+    "functionOnConnectWebsocketLambdaArn": {
+      "Type": "String",
+      "Description": "Input parameter describing Arn attribute for function/OnConnectWebsocketLambda resource"
+    },
+    "functionOnConnectWebsocketLambdaRegion": {
+      "Type": "String",
+      "Description": "Input parameter describing Region attribute for function/OnConnectWebsocketLambda resource"
+    },
+    "functionOnConnectWebsocketLambdaLambdaExecutionRole": {
+      "Type": "String",
+      "Description": "Input parameter describing LambdaExecutionRole attribute for function/OnConnectWebsocketLambda resource"
+    },
+    "functionOnDisconnectWebsocketLambdaName": {
+      "Type": "String",
+      "Description": "Input parameter describing Name attribute for function/OnDisconnectWebsocketLambda resource"
+    },
+    "functionOnDisconnectWebsocketLambdaArn": {
+      "Type": "String",
+      "Description": "Input parameter describing Arn attribute for function/OnDisconnectWebsocketLambda resource"
+    },
+    "functionOnDisconnectWebsocketLambdaRegion": {
+      "Type": "String",
+      "Description": "Input parameter describing Region attribute for function/OnDisconnectWebsocketLambda resource"
+    },
+    "functionOnDisconnectWebsocketLambdaLambdaExecutionRole": {
+      "Type": "String",
+      "Description": "Input parameter describing LambdaExecutionRole attribute for function/OnDisconnectWebsocketLambda resource"
+    }
+  },
+  "Conditions": {
+    "ShouldNotCreateEnvResources": {
+      "Fn::Equals": [
+        {
+          "Ref": "env"
+        },
+        "NONE"
+      ]
+    }
+  },
+  "Resources": {
+    "LinksLockerWebsocketAPI": {
+      "Type": "AWS::ApiGatewayV2::Api",
+      "Properties": {
+        "Name": {
+          "Ref": "ApiName"
+        },
+        "ProtocolType": "WEBSOCKET",
+        "RouteSelectionExpression": "$request.body.action",
+        "ApiKeySelectionExpression": "$request.header.x-api-key"
+      }
+    },
+    "ConnectIntegration": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "Description": "Connect Integration",
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${functionOnConnectWebsocketLambdaArn}/invocations"
+        }
+      }
+    },
+    "ConnectRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "AuthorizationType": "NONE",
+        "OperationName": "ConnectRoute",
+        "RouteKey": "$connect",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "ConnectIntegration"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "DisconnectIntegration": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "Description": "Disconnect Integration",
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${functionOnDisconnectWebsocketLambdaArn}/invocations"
+        }
+      }
+    },
+    "DisconnectRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "RouteKey": "$disconnect",
+        "AuthorizationType": "NONE",
+        "OperationName": "DisconnectRoute",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "DisconnectIntegration"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "DefaultRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "RouteKey": "$default",
+        "RouteResponseSelectionExpression": "$default",
+        "AuthorizationType": "NONE",
+        "OperationName": "DefaultRoute",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "DefaultIntegration"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "DefaultIntegration": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "Description": "Default Integration",
+        "IntegrationType": "MOCK",
+        "RequestTemplates": {
+          "200": "{\"statusCode\" : 200}"
+        },
+        "TemplateSelectionExpression": "200"
+      }
+    },
+    "DefaultIntegrationResponse": {
+      "Type": "AWS::ApiGatewayV2::IntegrationResponse",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "IntegrationId": {
+          "Ref": "DefaultIntegration"
+        },
+        "IntegrationResponseKey": "$default",
+        "ResponseTemplates": {
+          "200": "{\"statusCode\" : 200, \"connectionId\" : \"$context.connectionId\"}"
+        },
+        "TemplateSelectionExpression": "200"
+      }
+    },
+    "DefaultRouteResponse": {
+      "Type": "AWS::ApiGatewayV2::RouteResponse",
+      "Properties": {
+        "RouteId": {
+          "Ref": "DefaultRoute"
+        },
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "RouteResponseKey": "$default"
+      }
+    },
+    "SendNotificationIntegration": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "Description": "Send Integration",
+        "IntegrationType": "MOCK",
+        "RequestTemplates": {
+          "200": "{\"statusCode\" : 200}",
+          "TemplateSelectionExpression": "200"
+        }
+      }
+    },
+    "SendNotificationIntegrationResponse": {
+      "Type": "AWS::ApiGatewayV2::IntegrationResponse",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "IntegrationId": {
+          "Ref": "SendNotificationIntegration"
+        },
+        "IntegrationResponseKey": "$default",
+        "ResponseTemplates": {
+          "200": "{\"statusCode\" : 200}",
+          "400": "{\"statusCode\" : 400}",
+          "500": "{\"statusCode\" : 500}"
+        }
+      }
+    },
+    "SendNotificationRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "RouteKey": "sendnotification",
+        "AuthorizationType": "NONE",
+        "OperationName": "SendNotificationRoute",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "SendNotificationIntegration"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "SendNotificationRouteResponse": {
+      "Type": "AWS::ApiGatewayV2::RouteResponse",
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "RouteId": {
+          "Ref": "SendNotificationRoute"
+        },
+        "RouteResponseKey": "$default"
+      }
+    },
+    "LinksLockerWebsocketApiDeployment": {
+      "Type": "AWS::ApiGatewayV2::Deployment",
+      "Description": "Deployment resource for API Gateway Websocket API",
+      "DependsOn": [
+        "ConnectRoute",
+        "DisconnectRoute"
+      ],
+      "Properties": {
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        }
+      }
+    },
+    "Stage": {
+      "Type": "AWS::ApiGatewayV2::Stage",
+      "Properties": {
+        "StageName": {
+          "Fn::If": [
+            "ShouldNotCreateEnvResources",
+            "Prod",
+            {
+              "Ref": "env"
+            }
+          ]
+        },
+        "ApiId": {
+          "Ref": "LinksLockerWebsocketAPI"
+        },
+        "DeploymentId": {
+          "Ref": "LinksLockerWebsocketApiDeployment"
+        },
+        "DefaultRouteSettings": {
+          "DetailedMetricsEnabled": true,
+          "LoggingLevel": "ERROR",
+          "DataTraceEnabled": true,
+          "ThrottlingBurstLimit": 10,
+          "ThrottlingRateLimit": 10
+        },
+        "Tags": {
+          "API": "Websocket",
+          "AppName": "LinksLockerApp"
+        }
+      }
+    },
+    "functionOnConnectWebsocketLambdaPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "functionOnConnectWebsocketLambdaName"
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Sub": "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${LinksLockerWebsocketAPI}/${Stage}/$connect"
+        }
+      }
+    },
+    "functionOnDisconnectWebsocketLambdaPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "functionOnDisconnectWebsocketLambdaName"
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Sub": "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${LinksLockerWebsocketAPI}/${Stage}/$disconnect"
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "ApiId": {
+      "Value": {
+        "Ref": "LinksLockerWebsocketAPI"
+      }
+    },
+    "ApiName": {
+      "Value": {
+        "Ref": "ApiName"
+      }
+    },
+    "Endpoint": {
+      "Value": {
+        "Fn::GetAtt": [
+          "LinksLockerWebsocketAPI",
+          "ApiEndpoint"
+        ]
+      }
+    },
+    "WebSocketURI": {
+      "Description": "The WSS Protocol URI to connect to",
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "wss://",
+            {
+              "Ref": "LinksLockerWebsocketAPI"
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region"
+            },
+            ".amazonaws.com/",
+            {
+              "Ref": "Stage"
+            }
+          ]
+        ]
+      }
+    },
+    "WebSocketConnectionBaseURL": {
+      "Value": {
+        "Fn::Sub": "https://${LinksLockerWebsocketAPI}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/@connections"
+      }
+    }
+  }
+}

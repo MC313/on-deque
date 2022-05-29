@@ -3,9 +3,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "aws-xray-sdk-core": "3.2.0"
+    "aws-xray-sdk-core": "3.3.5"
   },
   "devDependencies": {
-    "aws-sdk": "2.783.0"
+    "aws-sdk": "2.1141.0"
   }
 }

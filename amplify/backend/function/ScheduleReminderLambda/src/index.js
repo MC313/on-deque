@@ -14,20 +14,18 @@ const region = process.env.REGION;
 
 const cloudWatchClient = new AWS.CloudWatchEvents({ region });
 
+const attributesToFormat = [
+    "linkId",
+    "userId",
+    "description",
+    "reminder",
+    "url"
+];
+
 exports.handler = async ({ Records }) => {
     for (const { eventName, dynamodb } of Records) {
 
-        if (!isInsertEvent(eventName)) return;
-
-        if (!hasReminderAttribute(dynamodb.NewImage.reminder)) return;
-
-        const attributesToFormat = [
-            "linkId",
-            "userId",
-            "description",
-            "reminder",
-            "url"
-        ];
+        if (!isInsertEvent(eventName) || !hasReminderAttribute(dynamodb.NewImage.reminder)) return;
 
         const {
             linkId,
@@ -45,6 +43,22 @@ exports.handler = async ({ Records }) => {
             console.error("Error processing CloudWatch Event. ", error)
         }
     }
+}
+
+function isInsertEvent(eventName) {
+    if (eventName !== "INSERT") {
+        console.warn(`Invalid dynamodb eventName: '${eventName}'. The ScheduleReminderLambda function is only ran on INSERT events.`)
+        return false;
+    }
+    return true;
+}
+
+function hasReminderAttribute(reminderObject) {
+    if (!reminderObject || reminderObject["NULL"]) {
+        console.warn("Table item doesn't contain a valid 'reminder' attribute.")
+        return false;
+    }
+    return true;
 }
 
 async function setCloudWatchRule(cloudWatchRuleName, reminder) {
@@ -74,22 +88,22 @@ async function setCloudWatchTarget(cloudWatchRuleName, targetSnsArn, InputParams
     return response;
 }
 
-function createCronJob(reminder) {
-    const { minutes, hour, day } = parseTime(reminder);
-    return `cron(${minutes} ${hour} ${day} * ? *)`;
-}
-
 // Helper function to format table attributes into a javascript object
 function formatTableAttributes(dynamodbImage, attributes) {
-    let attrResults = {};
+    let jsObject = {};
     attributes.forEach((attributeName) => {
         const attributeObject = dynamodbImage[attributeName]
-        attrResults = {
-            ...attrResults,
+        jsObject = {
+            ...jsObject,
             [attributeName]: attributeObject["S"] || attributeObject["N"]
         }
     });
-    return attrResults;
+    return jsObject;
+}
+
+function createCronJob(reminder) {
+    const { minutes, hour, day } = parseTime(+reminder);
+    return `cron(${minutes} ${hour} ${day} * ? *)`;
 }
 
 // Parses local milliseconds time format into minutes, hour, day, month
@@ -107,22 +121,6 @@ function parseTime(timeInFuture) {
         day: timeInfutureObject.toLocaleDateString("en-US", { day: "numeric" }),
         month: timeInfutureObject.toLocaleDateString("en-US", { month: "numeric" })
     }
-}
-
-function isInsertEvent(eventName) {
-    if (eventName !== "INSERT") {
-        console.warn(`Invalid dynamodb eventName: '${eventName}'. The ScheduleReminderLambda function is only ran on INSERT events.`)
-        return false;
-    }
-    return true;
-}
-
-function hasReminderAttribute(reminderObject) {
-    if (!reminderObject || reminderObject["NULL"]) {
-        console.warn("Table item doesn't contain a valid 'reminder' attribute.")
-        return false;
-    }
-    return true;
 }
 
 

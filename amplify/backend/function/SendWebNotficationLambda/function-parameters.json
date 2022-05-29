@@ -1,11 +1,5 @@
 {
   "permissions": {
-    "api": {
-      "LinksLockerWebSocketAPI": [
-        "read",
-        "update"
-      ]
-    },
     "storage": {
       "WebSocketConnectionIdTable": [
         "read"
@@ -14,9 +8,10 @@
   },
   "lambdaLayers": [
     {
-      "type": "ProjectLayer",
-      "resourceName": "DependenciesLayer",
-      "version": 5
+      "type": "ExternalLayer",
+      "arn": {
+        "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:DependenciesLayer:5"
+      }
     }
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "paths": {
+    "/link": {
+      "permissions": {
+        "setting": "open"
+      },
+      "lambdaFunction": "SaveLinkLambda"
+    },
+    "/links/{userId}": {
+      "permissions": {
+        "setting": "open"
+      },
+      "lambdaFunction": "ListUserLinksLambda"
+    }
+  }
+}

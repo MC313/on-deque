@@ -136,19 +136,12 @@
       "service": "Lambda",
       "dependsOn": [
         {
-          "category": "api",
-          "resourceName": "LinksLockerWebSocketAPI",
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ]
-        },
-        {
           "category": "storage",
           "resourceName": "WebSocketConnectionIdTable",
           "attributes": [
             "Name",
-            "Arn"
+            "Arn",
+            "StreamArn"
           ]
         },
         {
@@ -156,6 +149,15 @@
           "resourceName": "DependenciesLayer",
           "attributes": [
             "Arn"
+          ]
+        },
+        {
+          "category": "custom",
+          "resourceName": "LinksLockerWebSocketAPI",
+          "attributes": [
+            "ApiId",
+            "ApiName",
+            "Endpoint"
           ]
         }
       ]
@@ -222,28 +224,6 @@
           ]
         }
       ]
-    },
-    "LinksLockerWebSocketAPI": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "OnConnectWebsocketLambda",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "OnDisconnectWebsocketLambda",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
     }
   },
   "storage": {
@@ -266,6 +246,34 @@
           "resourceName": "SendWebNotficationLambda",
           "attributes": [
             "Arn"
+          ]
+        }
+      ]
+    }
+  },
+  "custom": {
+    "LinksLockerWebSocketAPI": {
+      "service": "customCloudformation",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "OnConnectWebsocketLambda",
+          "attributes": [
+            "Name",
+            "Arn",
+            "Region",
+            "LambdaExecutionRole"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "OnDisconnectWebsocketLambda",
+          "attributes": [
+            "Name",
+            "Arn",
+            "Region",
+            "LambdaExecutionRole"
           ]
         }
       ]

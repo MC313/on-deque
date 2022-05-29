@@ -73,12 +73,6 @@ export type AmplifyDependentResourcesAttributes = {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
-        },
-        "LinksLockerWebSocketAPI": {
-            "ApiId": "string",
-            "ApiName": "string",
-            "WebSocketURI": "string",
-            "WebSocketConnectionURL": "string"
         }
     },
     "storage": {
@@ -105,6 +99,15 @@ export type AmplifyDependentResourcesAttributes = {
         "ReminderNotificationTopic": {
             "Arn": "string",
             "Name": "string"
+        }
+    },
+    "custom": {
+        "LinksLockerWebsocketAPI": {
+            "ApiId": "string",
+            "ApiName": "string",
+            "Endpoint": "string",
+            "WebSocketURI": "string",
+            "WebSocketConnectionBaseURL": "string"
         }
     }
 }

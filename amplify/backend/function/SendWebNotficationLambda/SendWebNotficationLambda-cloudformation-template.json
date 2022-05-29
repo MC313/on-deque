@@ -5,14 +5,6 @@
     "env": {
       "Type": "String"
     },
-    "apiLinksLockerWebSocketAPIApiName": {
-      "Type": "String",
-      "Default": "apiLinksLockerWebSocketAPIApiName"
-    },
-    "apiLinksLockerWebSocketAPIApiId": {
-      "Type": "String",
-      "Default": "apiLinksLockerWebSocketAPIApiId"
-    },
     "storageWebSocketConnectionIdTableName": {
       "Type": "String",
       "Default": "storageWebSocketConnectionIdTableName"
@@ -30,6 +22,22 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "storageWebSocketConnectionIdTableStreamArn": {
+      "Type": "String",
+      "Default": "storageWebSocketConnectionIdTableStreamArn"
+    },
+    "customLinksLockerWebSocketAPIApiId": {
+      "Type": "String",
+      "Default": "customLinksLockerWebSocketAPIApiId"
+    },
+    "customLinksLockerWebSocketAPIApiName": {
+      "Type": "String",
+      "Default": "customLinksLockerWebSocketAPIApiName"
+    },
+    "customLinksLockerWebSocketAPIEndpoint": {
+      "Type": "String",
+      "Default": "customLinksLockerWebSocketAPIEndpoint"
     }
   },
   "Conditions": {
@@ -77,12 +85,6 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_LINKSLOCKERWEBSOCKETAPI_APINAME": {
-              "Ref": "apiLinksLockerWebSocketAPIApiName"
-            },
-            "API_LINKSLOCKERWEBSOCKETAPI_APIID": {
-              "Ref": "apiLinksLockerWebSocketAPIApiId"
-            },
             "STORAGE_WEBSOCKETCONNECTIONIDTABLE_NAME": {
               "Ref": "storageWebSocketConnectionIdTableName"
             },
@@ -90,7 +92,10 @@
               "Ref": "storageWebSocketConnectionIdTableArn"
             },
             "WEBSOCKET_ENDPOINT_URL": {
-              "Fn::Sub": "https://${apiLinksLockerWebSocketAPIApiId}.execute-api.${AWS::Region}.amazonaws.com/${env}"
+              "Ref": "customLinksLockerWebSocketAPIEndpoint"
+            },
+            "STORAGE_WEBSOCKETCONNECTIONIDTABLE_STREAMARN": {
+              "Ref": "storageWebSocketConnectionIdTableStreamArn"
             }
           }
         },
@@ -211,33 +216,6 @@
             {
               "Effect": "Allow",
               "Action": [
-                "apigateway:GET",
-                "apigateway:HEAD",
-                "apigateway:OPTIONS",
-                "apigateway:PATCH"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      "::/restapis/",
-                      {
-                        "Ref": "apiLinksLockerWebSocketAPIApiName"
-                      },
-                      "/*"
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
                 "dynamodb:Get*",
                 "dynamodb:BatchGetItem",
                 "dynamodb:List*",
@@ -286,7 +264,7 @@
               ],
               "Resource": [
                 {
-                  "Fn::Sub": "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiLinksLockerWebSocketAPIApiId}/${env}/POST/@connections/*"
+                  "Fn::Sub": "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${customLinksLockerWebSocketAPIApiId}/${env}/POST/@connections/*"
                 }
               ]
             }
