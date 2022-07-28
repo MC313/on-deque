@@ -3,9 +3,9 @@ import {
   toUtcTime,
   unitToMilliseconds,
 } from "@on-deque/shared/util-format-date";
-import { FormData } from "@on-deque/ui-form-field";
+import { FormFields } from "@on-deque/context-form";
 
-export const formatPayload = (payload: LinkAPIPayload) => {
+export const formatFields = (payload: FormFields): FormattedFields => {
   const {
     reminderUnit,
     reminderValue,
@@ -15,12 +15,12 @@ export const formatPayload = (payload: LinkAPIPayload) => {
     url,
     ...rest
   } = payload;
-  const datePicker = _setHour(datePickerValue);
+  const datePicker = setHour(datePickerValue);
   return {
     url,
     description: description || "",
     tags: tags ? tags.split(",").map((tag) => tag.trim()) : [],
-    reminder: _setReminderValue(reminderValue, reminderUnit, datePicker),
+    reminder: setReminderValue(reminderValue, reminderUnit, datePicker),
     ...rest,
   };
 };
@@ -39,7 +39,7 @@ export const validatePayload = (payload: LinkAPIPayload) => {
   return isValid;
 };
 
-const _setReminderValue = (
+const setReminderValue = (
   reminderValue: number,
   reminderUnit: string,
   datepicker: string | undefined
@@ -52,12 +52,17 @@ const _setReminderValue = (
 /*
   This updates the date picker hour value so that the reminder will be sent at 2:00pm instead of 12:00am on the selected day.
 */
-const _setHour = (datepicker: undefined | string) => {
+const setHour = (datepicker: undefined | string) => {
   if (!datepicker) return datepicker;
   const updatedMillisecs = +datepicker + unitToMilliseconds(14, "hours");
   return updatedMillisecs.toString();
 };
 
-export interface LinkAPIPayload extends FormData {
+export interface FormattedFields
+  extends Pick<FormFields, "url" | "description"> {
+  reminder: string | number | undefined;
+  tags: string[];
+}
+export interface LinkAPIPayload extends FormattedFields {
   userId: string;
 }

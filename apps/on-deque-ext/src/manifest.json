@@ -4,12 +4,14 @@
     "description": "Reduce the number of tabs you keep open by saving the urls you find around the web and setting reminders to read them later.",
     "version": "1.0",
     "icons": {
-        "16": "assets/hello_extensions.png"
+        "16": "assets/icon16.png",
+        "48": "assets/icon48.png",
+        "128": "assets/icon128.png"
     },
     "action": {
         "default_title": "On Deque",
         "default_popup": "index.html",
-        "default_icon": "assets/hello_extensions.png"
+        "default_icon": "assets/icon16.png"
     },
     "background": {
         "service_worker": "background.js"
@@ -24,12 +26,14 @@
         }
     },
     "host_permissions": [
-        "https://vc9srwoh4b.execute-api.us-east-1.amazonaws.com/dev/link",
+        "https://vc9srwoh4b.execute-api.us-east-1.amazonaws.com/dev/link'",
         "https://vc9srwoh4b.execute-api.us-east-1.amazonaws.com/prod/link"
     ],
     "permissions": [
         "notifications",
         "storage",
-        "tabs"
+        "tabs",
+        "https://vc9srwoh4b.execute-api.us-east-1.amazonaws.com/dev/link'",
+        "https://vc9srwoh4b.execute-api.us-east-1.amazonaws.com/prod/link"
     ]
 }

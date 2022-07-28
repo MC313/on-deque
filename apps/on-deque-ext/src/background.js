@@ -1,30 +1,28 @@
-// Initialize and create websocket connection here
+const onWebSocketInit = (userId) => {
+    const WEBSOCKET_BASE_URL = "wss://55sluosluk.execute-api.us-east-1.amazonaws.com";
+    return new WebSocket(`${WEBSOCKET_BASE_URL}/dev?userId=${userId}`);
+};
 
-chrome.runtime.onMessage.addListener(({ userId }, sender, sendMessage) => {
-    const WEBSOCKET_BASE_URL = "wss://khxvnnk5g2.execute-api.us-east-1.amazonaws.com";
-
-    const onWebSocketInit = (userId) => {
-        return new WebSocket(`${WEBSOCKET_BASE_URL}/dev?userId=${userId}`);
-    };
-
+chrome.runtime.onMessage.addListener(({ userId }, sender, sendResponse) => {
+    // Initialize and create websocket connection here
     let socket = onWebSocketInit(userId);
 
     socket.onopen = () => {
-        const message = "Websocket connected";
+        const message = "[background.js] Websocket connected.";
         console.log(message);
-        sendMessage({ message });
+        sendResponse({ message });
     };
 
     socket.onmessage = ({ data }) => {
-        const message = JSON.parse(data);
-        console.log("WEBSOCKET RESPONSE: ", message);
+        const notification = JSON.parse(data);
+        console.log(`[background.js] Notification received. ${notification}`);
         chrome.notifications.create("", {
-            iconUrl: "./hello_extensions.png",
+            iconUrl: "./assets/icon48.png",
             type: "basic",
             title: "Test Notification",
-            message: `Access link here: ${message.url}`
+            message: `Access link here: ${notification.url}`
         });
     };
 
-    socket.onclose = () => console.log("SOCKET CLOSED");
+    socket.onclose = () => console.log("WEBSOCKET CLOSED");
 });

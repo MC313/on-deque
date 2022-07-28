@@ -2,7 +2,8 @@ import React from "react";
 
 import * as yup from "yup";
 
-import { FormData, ReminderUnit, REMINDER_UNITS } from "../types";
+import { FormFields } from "@on-deque/context-form";
+import { ReminderUnit, REMINDER_UNITS } from "../types";
 
 export const useValidateInput: UseValidateInput = (
   inputName,
@@ -43,7 +44,7 @@ type UseValidateInputReturn = Readonly<
 
 type InputError = undefined | string;
 
-type FormSchema = yup.SchemaOf<Omit<FormData, "datePickerValue">>;
+type FormSchema = yup.SchemaOf<Omit<FormFields, "datePickerValue">>;
 
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 

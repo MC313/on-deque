@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import { useForm } from "@on-deque/context-form";
-import { useUserId } from "@on-deque/data-use-user-id";
+import { onStorage } from "@on-deque/data-use-user-id";
 import { InputError } from "@on-deque/ui-input-error";
 import { ReviewText } from "@on-deque/ui-review-text";
 import { Step } from "@on-deque/ui-step";
@@ -9,18 +9,20 @@ import { SubmitButton } from "@on-deque/ui-submit-button";
 import { capitalize } from "@on-deque/shared/util-capitalize";
 import { millisecondsToDate } from "@on-deque/shared/util-format-date";
 import {
-  formatPayload,
+  formatFields,
+  FormattedFields,
+  LinkAPIPayload,
   validatePayload,
 } from "@on-deque/shared/util-format-link-payload";
 
 export const StepThree = () => {
   const [{ error, fields, status }, { submitForm }] = useForm();
-  const [userId] = useUserId();
-  const fieldsWithId = { userId, ...fields };
-  const apiPayload = formatPayload(fieldsWithId);
-  const { userId: id, ...formFields } = apiPayload;
+  const userId = onStorage.get("userId");
+  const formFields: FormattedFields = formatFields(fields);
+  console.log("FORM USER DATA: ", { userId, ...formFields });
+  const apiPayload: LinkAPIPayload = { userId, ...formFields };
 
-  if (!validatePayload(fieldsWithId)) {
+  if (!validatePayload(apiPayload)) {
     const message = "Invalid userId restart the extension and try again";
   }
 

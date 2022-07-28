@@ -108,7 +108,9 @@ const StyledFormFieldGroup = styled.div`
 `;
 
 const StyledLabel = styled(InputLabel)`
-  margin-left: 25px;
+  display: block;
+  text-align: center;
+  transform: translate(0%, 0%);
 `;
 
 const StyledText = styled.p`
